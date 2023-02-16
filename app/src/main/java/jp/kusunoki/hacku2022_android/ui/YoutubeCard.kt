@@ -71,8 +71,8 @@ fun CardContent() {
             "超人気youtuberから学ぶyoutuberになるには！あいうえおかきくけこ",
             style = MaterialTheme.typography.body2,
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(4.dp),
+                .padding(4.dp)
+                .fillMaxWidth(),
             maxLines = 2, // 最大2行に制限する
             overflow = TextOverflow.Ellipsis // 最大行数を超えた場合に末尾を省略する
         )
