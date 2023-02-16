@@ -19,7 +19,7 @@ class MainActivity : ComponentActivity() {
             YoutubeCard()
             Hacku2022androidTheme {
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
+//                    modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
                 }
