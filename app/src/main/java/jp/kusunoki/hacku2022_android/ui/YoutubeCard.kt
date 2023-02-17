@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 fun YoutubeCardList() {
     LazyRow(
         modifier = Modifier.fillMaxWidth(),
-        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
+        contentPadding = PaddingValues(horizontal = 8.dp)
     ) {
         items(10) {
             YoutubeCard(onCardClicked = {
@@ -39,7 +39,7 @@ fun YoutubeCard(onCardClicked: () -> Unit) {
         modifier = Modifier
             .height(250.dp)
             .width(215.dp)
-            .padding(16.dp)
+            .padding(8.dp)
             .wrapContentSize()
             .clickable(onClick = onCardClicked),
         backgroundColor= MaterialTheme.colors.surface,
@@ -50,8 +50,7 @@ fun YoutubeCard(onCardClicked: () -> Unit) {
 }
 @Composable
 fun CardContent() {
-    Column(modifier = Modifier
-        .fillMaxWidth()) {
+    Column(modifier = Modifier.fillMaxWidth()) {
         Image(
             painter = painterResource(R.drawable.image),
             contentDescription = "サムネ画像",
