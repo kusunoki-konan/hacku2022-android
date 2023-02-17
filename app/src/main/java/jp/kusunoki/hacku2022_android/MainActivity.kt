@@ -11,7 +11,9 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.sp
 import jp.kusunoki.hacku2022_android.ui.theme.Hacku2022androidTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,11 +22,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             Hacku2022androidTheme {
                 Column (){
-                    Text("おすすめの講座")
+                    Text("おすすめの講座",fontWeight = FontWeight.Bold,fontSize = 20.sp)
                     YoutubeCardList()
-                    Text("新着の講座")
+                    Text("新着の講座",fontWeight = FontWeight.Bold,fontSize = 20.sp)
                     YoutubeCardList()
-                    Text("人気の講座")
+                    Text("人気の講座",fontWeight = FontWeight.Bold,fontSize = 20.sp)
                     YoutubeCardList()
                 }
                 Surface(
