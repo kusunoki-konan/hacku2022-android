@@ -26,7 +26,7 @@ class MainActivity : ComponentActivity() {
             Hacku2022androidTheme {
                 // Smoothly scroll 100px on first composition
                 val state = rememberScrollState()
-                LaunchedEffect(Unit) { state.animateScrollTo(100) }
+                LaunchedEffect(Unit) { state.animateScrollTo(0) }
 
                 Column(
                     modifier = Modifier
