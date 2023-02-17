@@ -1,5 +1,6 @@
 package jp.kusunoki.hacku2022_android
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -25,19 +26,22 @@ fun YoutubeCardList() {
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
     ) {
         items(10) {
-            YoutubeCard()
+            YoutubeCard(onCardClicked = {
+                Log.d("YoutubeCard", "Card clicked!")
+            })
         }
     }
 }
 @Composable
-fun YoutubeCard() {
+fun YoutubeCard(onCardClicked: () -> Unit) {
     Card(
         shape = RoundedCornerShape(10.dp),
         modifier = Modifier
             .height(250.dp)
             .width(215.dp)
             .padding(16.dp)
-            .wrapContentSize(),
+            .wrapContentSize()
+            .clickable(onClick = onCardClicked),
         backgroundColor= MaterialTheme.colors.surface,
         elevation = 8.dp
     ) {
