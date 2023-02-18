@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">hacku2022-android</string>
+
+    <!-- Navigation Label -->
+    <string name="home_screen">Home</string>
+    <string name="history_screen">History</string>
 </resources>
