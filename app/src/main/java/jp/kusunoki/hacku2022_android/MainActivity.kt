@@ -4,10 +4,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -24,26 +25,25 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             Hacku2022androidTheme {
-                // Smoothly scroll 100px on first composition
                 val state = rememberScrollState()
-                LaunchedEffect(Unit) { state.animateScrollTo(0) }
-
-                Column(
-                    modifier = Modifier
-                        .padding(horizontal = 8.dp)
-                        .verticalScroll(state)
-                ) {
-                    Text("おすすめの講座",fontWeight = FontWeight.Bold,fontSize = 20.sp,modifier = Modifier.padding(all = 8.dp))
-                    YoutubeCardList()
-                    Text("新着の講座",fontWeight = FontWeight.Bold,fontSize = 20.sp,modifier = Modifier.padding(all = 8.dp))
-                    YoutubeCardList()
-                    Text("人気の講座",fontWeight = FontWeight.Bold,fontSize = 20.sp,modifier = Modifier.padding(all = 8.dp))
-                    YoutubeCardList()
+                LaunchedEffect(Unit) {
+                    state.animateScrollTo(0)
                 }
                 Surface(
-//                    modifier = Modifier.fillMaxSize(),
-//                    color = MaterialTheme.colors.background
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colors.background
                 ) {
+                    Column(
+                        modifier = Modifier
+                            .verticalScroll(state)
+                    ) {
+                        Text("おすすめの講座",fontWeight = FontWeight.Bold,fontSize = 20.sp,modifier = Modifier.padding(all = 8.dp))
+                        YoutubeCardList()
+                        Text("新着の講座",fontWeight = FontWeight.Bold,fontSize = 20.sp,modifier = Modifier.padding(all = 8.dp))
+                        YoutubeCardList()
+                        Text("人気の講座",fontWeight = FontWeight.Bold,fontSize = 20.sp,modifier = Modifier.padding(all = 8.dp))
+                        YoutubeCardList()
+                    }
                 }
 
             }
