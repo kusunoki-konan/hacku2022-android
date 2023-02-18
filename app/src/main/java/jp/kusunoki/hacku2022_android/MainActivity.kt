@@ -1,7 +1,6 @@
 package jp.kusunoki.hacku2022_android
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.StringRes
