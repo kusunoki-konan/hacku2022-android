@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -18,11 +19,13 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             Hacku2022androidTheme {
-                YoutubeCard()
                 Surface(
-//                    modifier = Modifier.fillMaxSize(),
-//                    color = MaterialTheme.colors.background
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colors.background
                 ) {
+                    Column(){
+                        YoutubeCard()
+                    }
                 }
 
             }
