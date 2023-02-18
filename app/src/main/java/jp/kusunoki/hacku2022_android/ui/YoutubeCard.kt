@@ -1,8 +1,10 @@
 package jp.kusunoki.hacku2022_android
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -18,14 +20,28 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun YoutubeCard() {
+fun YoutubeCardList() {
+    LazyRow(
+        modifier = Modifier.fillMaxWidth(),
+        contentPadding = PaddingValues(horizontal = 8.dp)
+    ) {
+        items(10) {
+            YoutubeCard(onCardClicked = {
+                Log.d("YoutubeCard", "Card clicked!")
+            })
+        }
+    }
+}
+@Composable
+fun YoutubeCard(onCardClicked: () -> Unit) {
     Card(
         shape = RoundedCornerShape(10.dp),
         modifier = Modifier
             .height(250.dp)
             .width(215.dp)
-            .padding(16.dp)
-            .wrapContentSize(),
+            .padding(8.dp)
+            .wrapContentSize()
+            .clickable(onClick = onCardClicked),
         backgroundColor= MaterialTheme.colors.surface,
         elevation = 8.dp
     ) {
@@ -34,8 +50,7 @@ fun YoutubeCard() {
 }
 @Composable
 fun CardContent() {
-    Column(modifier = Modifier
-        .fillMaxWidth()) {
+    Column(modifier = Modifier.fillMaxWidth()) {
         Image(
             painter = painterResource(R.drawable.image),
             contentDescription = "サムネ画像",
