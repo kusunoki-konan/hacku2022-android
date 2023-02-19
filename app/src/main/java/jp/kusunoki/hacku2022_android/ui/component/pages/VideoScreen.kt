@@ -20,7 +20,6 @@ fun VideoScreen(text: String) {
             val VIDEO_ID = youtubeVideoId(text)
             if(youtubeVideoId(text)!=null) {
                 YoutubePlayer(videoId = "$VIDEO_ID", modifier = Modifier)
-                Text("$VIDEO_ID")
             }
             if(youtubeVideoId(text)==null){
                 Text("その動画は存在しません")
