@@ -9,18 +9,19 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.input.TextFieldValue
-import jp.kusunoki.hacku2022_android.ui.SearchBar
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import jp.kusunoki.hacku2022_android.YoutubeCardList
+import jp.kusunoki.hacku2022_android.ui.SearchBar
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavController) {
     // TODO: Home画面
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -30,6 +31,11 @@ fun HomeScreen() {
             val textFieldState = remember { mutableStateOf(TextFieldValue("")) }
             SearchBar(textFieldState = textFieldState) {
                 // TODO 検索バーに入力された文字でYoutubeのAPIを叩く
+                // TODO VideoScreenに移動
+                navController.navigate("video")
+                // substring
+                //画面遷移のためにNavController
+                //safe args
             }
             val state = rememberScrollState()
             LaunchedEffect(Unit) {

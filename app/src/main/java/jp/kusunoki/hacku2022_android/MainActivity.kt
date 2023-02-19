@@ -11,7 +11,10 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
@@ -22,6 +25,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import jp.kusunoki.hacku2022_android.ui.component.pages.HistoryScreen
 import jp.kusunoki.hacku2022_android.ui.component.pages.HomeScreen
 import jp.kusunoki.hacku2022_android.ui.component.pages.VideoScreen
@@ -57,7 +61,7 @@ class MainActivity : ComponentActivity() {
                                 startDestination = Screen.Home.route
                             ) {
                                 composable(Screen.Home.route) {
-                                    HomeScreen()
+                                    HomeScreen (navController = navController)
                                 }
                                 composable(Screen.History.route) {
                                     HistoryScreen()
