@@ -18,8 +18,14 @@ fun VideoScreen(text: String) {
     ) {
         Column(){
             val VIDEO_ID = youtubeVideoId(text)
-            if(youtubeVideoId(text)!=null) {
-                YoutubePlayer(videoId = "$VIDEO_ID", modifier = Modifier)
+            val VIDEO_TIME = youtubeTime(text)
+            if(VIDEO_ID!=null) {
+                if(VIDEO_TIME==null){
+                    YoutubePlayer(videoId = "$VIDEO_ID", startSeconds = 0.toFloat(), modifier = Modifier)
+                }
+                else if(VIDEO_TIME != 0.toFloat()){
+                    YoutubePlayer(videoId = "$VIDEO_ID", startSeconds = VIDEO_TIME, modifier = Modifier)
+                }
             }
             if(youtubeVideoId(text)==null){
                 Text("その動画は存在しません")
@@ -28,7 +34,6 @@ fun VideoScreen(text: String) {
     }
 }
 //youtubeのVideoIdを取得する
-// TODO タイムがある時にはまだ適応していない
 fun youtubeVideoId(url: String): String? {
     var matchResult: MatchResult? = null
     //普通のurl、再生リストの動画のurlなど
@@ -50,4 +55,26 @@ fun youtubeVideoId(url: String): String? {
         return null
     }
     return matchResult?.value
+}
+fun youtubeTime(url:String): Float? {
+    var matchResult: MatchResult? = null
+    //普通のurl、再生リストの動画のurlなど
+    if(url.indexOf("youtube.com/watch?")!=-1){
+        val pattern =  "(?<=t=)\\d+".toRegex()
+        matchResult = pattern.find(url)
+    }
+    //短縮urlの場合
+    else if(url.indexOf("youtu.be/")!=-1){
+        val pattern =  "(?<=t=)\\d+".toRegex()
+        matchResult = pattern.find(url)
+    }
+    //埋め込みurlの場合
+    else if(url.indexOf("youtube.com/embed/")!=-1){
+        val pattern =  "(?<=start=)\\d+".toRegex()
+        matchResult = pattern.find(url)
+    }
+    else{
+        return 0.toFloat()
+    }
+    return matchResult?.value?.toFloat()
 }

@@ -56,15 +56,17 @@ fun YouTubePlayer(
 }
 
 // 一番シンプルなYoutubePlayer
+// CHANGED : startSecondsを足した
 @Composable
 fun YoutubePlayer(
     videoId: String,
+    startSeconds: Float,
     modifier: Modifier,
     onCurrentSecond: (second: Float) -> Unit = {}
 ) {
     YouTubePlayer(
         videoId = videoId,
-        startSeconds = 0f,
+        startSeconds = startSeconds,
         modifier = modifier,
         onCurrentSecond = onCurrentSecond
     )
