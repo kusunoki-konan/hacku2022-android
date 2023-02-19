@@ -31,8 +31,7 @@ fun HomeScreen(navController: NavController) {
         Column {
             val textFieldState = remember { mutableStateOf(TextFieldValue("")) }
             SearchBar(textFieldState = textFieldState) {
-                // TODO 検索バーに入力された文字でYoutubeのAPIを叩く
-                // TODO VideoScreenに移動
+                // TODO safe argsで安全に値渡しをしたい
                 val text = textFieldState.value.text
                 if (text.isNotEmpty()) {
                     // ?,/ に関しては URL エンコーディングを適応
@@ -41,8 +40,6 @@ fun HomeScreen(navController: NavController) {
                     .replace("?", "%3F")
                 navController.navigate("video/$encodedUrl")
                 }
-                // substring
-                // safe args
             }
             val state = rememberScrollState()
             LaunchedEffect(Unit) {
