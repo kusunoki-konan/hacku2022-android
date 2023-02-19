@@ -25,7 +25,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import jp.kusunoki.hacku2022_android.ui.component.pages.HistoryScreen
 import jp.kusunoki.hacku2022_android.ui.component.pages.HomeScreen
 import jp.kusunoki.hacku2022_android.ui.component.pages.VideoScreen
@@ -66,9 +65,14 @@ class MainActivity : ComponentActivity() {
                                 composable(Screen.History.route) {
                                     HistoryScreen()
                                 }
-                                composable(Screen.Video.route) {
-                                    VideoScreen()
+                                // TODO 引数を受け取る側
+                                composable(
+                                    route = "video/{text}",
+                                ) { backStackEntry ->
+                                    val text = backStackEntry.arguments?.getString("text") ?: ""
+                                    VideoScreen(text)
                                 }
+
                             }
                         }
                     }

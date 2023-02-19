@@ -32,7 +32,11 @@ fun HomeScreen(navController: NavController) {
             SearchBar(textFieldState = textFieldState) {
                 // TODO 検索バーに入力された文字でYoutubeのAPIを叩く
                 // TODO VideoScreenに移動
-                navController.navigate("video")
+                val text = textFieldState.value.text
+                if (text.isNotEmpty()) {
+                    // テキストが入力されている場合、画面遷移する
+                    navController.navigate("video/$text")
+                }
                 // substring
                 //画面遷移のためにNavController
                 //safe args
