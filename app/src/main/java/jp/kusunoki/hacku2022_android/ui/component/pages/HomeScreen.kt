@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import jp.kusunoki.hacku2022_android.YoutubeCardList
 import jp.kusunoki.hacku2022_android.ui.SearchBar
+
 @Composable
 fun HomeScreen(navController: NavController) {
     // TODO: Home画面
@@ -34,12 +35,14 @@ fun HomeScreen(navController: NavController) {
                 // TODO VideoScreenに移動
                 val text = textFieldState.value.text
                 if (text.isNotEmpty()) {
-                    // テキストが入力されている場合、画面遷移する
-                    navController.navigate("video/$text")
+                    // ?,/ に関しては URL エンコーディングを適応
+                val encodedUrl = text
+                    .replace("/", "%2F")
+                    .replace("?", "%3F")
+                navController.navigate("video/$encodedUrl")
                 }
                 // substring
-                //画面遷移のためにNavController
-                //safe args
+                // safe args
             }
             val state = rememberScrollState()
             LaunchedEffect(Unit) {

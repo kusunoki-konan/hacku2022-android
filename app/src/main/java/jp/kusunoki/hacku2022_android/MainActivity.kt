@@ -65,14 +65,12 @@ class MainActivity : ComponentActivity() {
                                 composable(Screen.History.route) {
                                     HistoryScreen()
                                 }
-                                // TODO 引数を受け取る側
                                 composable(
                                     route = "video/{text}",
                                 ) { backStackEntry ->
                                     val text = backStackEntry.arguments?.getString("text") ?: ""
                                     VideoScreen(text)
                                 }
-
                             }
                         }
                     }
