@@ -51,6 +51,11 @@ fun youtubeVideoId(url: String): String? {
         val pattern = "(?<=embed/)[^?]+".toRegex()
         matchResult = pattern.find(url)
     }
+    //ライブのurlのとき
+    else if(url.indexOf("youtube.com/live/")!=-1){
+        val pattern = "(?<=live/)[^?]+".toRegex()
+        matchResult = pattern.find(url)
+    }
     else{
         return null
     }
@@ -71,6 +76,11 @@ fun youtubeTime(url:String): Float? {
     //埋め込みurlの場合
     else if(url.indexOf("youtube.com/embed/")!=-1){
         val pattern =  "(?<=start=)\\d+".toRegex()
+        matchResult = pattern.find(url)
+    }
+    //ライブのurlのとき
+    else if(url.indexOf("youtube.com/live/")!=-1){
+        val pattern = "(?<=t=)\\d+".toRegex()
         matchResult = pattern.find(url)
     }
     else{
