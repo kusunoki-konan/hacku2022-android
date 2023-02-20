@@ -7,84 +7,90 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import jp.kusunoki.hacku2022_android.ui.YoutubePlayer
+import jp.kusunoki.hacku2022_android.ui.YouTubePlayer
 
 @Composable
-fun VideoScreen(text: String) {
+fun VideoScreen(text: String = "") {
     // TODO: 動画再生画面
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.background
     ) {
-        Column(){
-            val VIDEO_ID = youtubeVideoId(text)
-            val VIDEO_TIME = youtubeTime(text)
-            if(VIDEO_ID!=null) {
-                if(VIDEO_TIME==null){
-                    YoutubePlayer(videoId = "$VIDEO_ID", startSeconds = 0.toFloat(), modifier = Modifier)
-                }
-                else if(VIDEO_TIME != 0.toFloat()){
-                    YoutubePlayer(videoId = "$VIDEO_ID", startSeconds = VIDEO_TIME, modifier = Modifier)
+        Column() {
+            val videoId = youtubeVideoId(text)
+            val videoTime = youtubeTime(text)
+            if (videoId != null) {
+                if (videoTime == null) {
+                    YouTubePlayer(videoId = "$videoId")
+                } else if (videoTime != 0.toFloat()) {
+                    YouTubePlayer(
+                        videoId = "$videoId",
+                        startSeconds = videoTime
+                    )
                 }
             }
-            if(youtubeVideoId(text)==null){
+            if (youtubeVideoId(text) == null) {
                 Text("その動画は存在しません")
             }
         }
     }
 }
+
 //youtubeのVideoIdを取得する
 fun youtubeVideoId(url: String): String? {
-    var matchResult: MatchResult? = null
-    //普通のurl、再生リストの動画のurlなど
-    if(url.indexOf("youtube.com/watch?")!=-1){
-        val pattern = "(?<=v=)[^&$]+".toRegex()
-        matchResult = pattern.find(url)
-    }
-    //短縮urlの場合
-    else if(url.indexOf("youtu.be/")!=-1){
-        val pattern = "(?<=youtu.be/)[^?]+".toRegex()
-        matchResult = pattern.find(url)
-    }
-    //埋め込みurlの場合
-    else if(url.indexOf("youtube.com/embed/")!=-1){
-        val pattern = "(?<=embed/)[^?]+".toRegex()
-        matchResult = pattern.find(url)
-    }
-    //ライブのurlのとき
-    else if(url.indexOf("youtube.com/live/")!=-1){
-        val pattern = "(?<=live/)[^?]+".toRegex()
-        matchResult = pattern.find(url)
-    }
-    else{
-        return null
+    val matchResult = when {
+        //普通のurl、再生リストの動画のurlなど
+        url.indexOf("youtube.com/watch?") != -1 -> {
+            val pattern = "(?<=v=)[^&$]+".toRegex()
+            pattern.find(url)
+        }
+        //短縮urlの場合
+        url.indexOf("youtu.be/") != -1 -> {
+            val pattern = "(?<=youtu.be/)[^?]+".toRegex()
+            pattern.find(url)
+        }
+        //埋め込みurlの場合
+        url.indexOf("youtube.com/embed/") != -1 -> {
+            val pattern = "(?<=embed/)[^?]+".toRegex()
+            pattern.find(url)
+        }
+        //ライブのurlのとき
+        url.indexOf("youtube.com/live/") != -1 -> {
+            val pattern = "(?<=live/)[^?]+".toRegex()
+            pattern.find(url)
+        }
+        else -> {
+            return null
+        }
     }
     return matchResult?.value
 }
-fun youtubeTime(url:String): Float? {
-    var matchResult: MatchResult? = null
-    //普通のurl、再生リストの動画のurlなど
-    if(url.indexOf("youtube.com/watch?")!=-1){
-        val pattern =  "(?<=t=)\\d+".toRegex()
-        matchResult = pattern.find(url)
-    }
-    //短縮urlの場合
-    else if(url.indexOf("youtu.be/")!=-1){
-        val pattern =  "(?<=t=)\\d+".toRegex()
-        matchResult = pattern.find(url)
-    }
-    //埋め込みurlの場合
-    else if(url.indexOf("youtube.com/embed/")!=-1){
-        val pattern =  "(?<=start=)\\d+".toRegex()
-        matchResult = pattern.find(url)
-    }
-    //ライブのurlのとき
-    else if(url.indexOf("youtube.com/live/")!=-1){
-        val pattern = "(?<=t=)\\d+".toRegex()
-        matchResult = pattern.find(url)
-    }
-    else{
-        return 0.toFloat()
+
+fun youtubeTime(url: String): Float? {
+    val matchResult = when {
+        //普通のurl、再生リストの動画のurlなど
+        url.indexOf("youtube.com/watch?") != -1 -> {
+            val pattern = "(?<=t=)\\d+".toRegex()
+            pattern.find(url)
+        }
+        //短縮urlの場合
+        url.indexOf("youtu.be/") != -1 -> {
+            val pattern = "(?<=t=)\\d+".toRegex()
+            pattern.find(url)
+        }
+        //埋め込みurlの場合
+        url.indexOf("youtube.com/embed/") != -1 -> {
+            val pattern = "(?<=start=)\\d+".toRegex()
+            pattern.find(url)
+        }
+        //ライブのurlのとき
+        url.indexOf("youtube.com/live/") != -1 -> {
+            val pattern = "(?<=t=)\\d+".toRegex()
+            pattern.find(url)
+        }
+        else -> {
+            return 0.toFloat()
+        }
     }
     return matchResult?.value?.toFloat()
 }

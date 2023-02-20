@@ -60,16 +60,16 @@ class MainActivity : ComponentActivity() {
                                 startDestination = Screen.Home.route
                             ) {
                                 composable(Screen.Home.route) {
-                                    HomeScreen (navController = navController)
+                                    HomeScreen ()
                                 }
                                 composable(Screen.History.route) {
                                     HistoryScreen()
                                 }
                                 composable(
-                                    route = "video/{text}",
+                                    route = "${Screen.Video.route}/{videoUrl}",
                                 ) { backStackEntry ->
-                                    val text = backStackEntry.arguments?.getString("text") ?: ""
-                                    VideoScreen(text)
+                                    val videoUrl = backStackEntry.arguments?.getString("videoUrl") ?: ""
+                                    VideoScreen(videoUrl)
                                 }
                             }
                         }

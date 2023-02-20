@@ -17,13 +17,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
+import jp.kusunoki.hacku2022_android.LocalNavController
+import jp.kusunoki.hacku2022_android.Screen
 import jp.kusunoki.hacku2022_android.YoutubeCardList
 import jp.kusunoki.hacku2022_android.ui.SearchBar
 
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen() {
     // TODO: Home画面
+    val navController = LocalNavController.current
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.background,
@@ -32,13 +34,13 @@ fun HomeScreen(navController: NavController) {
             val textFieldState = remember { mutableStateOf(TextFieldValue("")) }
             SearchBar(textFieldState = textFieldState) {
                 // TODO safe argsで安全に値渡しをしたい
-                val text = textFieldState.value.text
-                if (text.isNotEmpty()) {
+                val videoUrl = textFieldState.value.text
+                if (videoUrl.isNotEmpty()) {
                     // ?,/ に関しては URL エンコーディングを適応
-                val encodedUrl = text
-                    .replace("/", "%2F")
-                    .replace("?", "%3F")
-                navController.navigate("video/$encodedUrl")
+                    val encodedUrl = videoUrl
+                        .replace("/", "%2F")
+                        .replace("?", "%3F")
+                    navController.navigate("${Screen.Video.route}/$encodedUrl")
                 }
             }
             val state = rememberScrollState()

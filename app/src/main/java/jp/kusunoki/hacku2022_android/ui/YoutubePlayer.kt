@@ -19,7 +19,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTube
 fun YouTubePlayer(
     videoId: String,
     startSeconds: Float,
-    modifier: Modifier,
+    modifier : Modifier = Modifier,
     onCurrentSecond: (second: Float) -> Unit = {}
 ) {
     AndroidView(
@@ -56,17 +56,15 @@ fun YouTubePlayer(
 }
 
 // 一番シンプルなYoutubePlayer
-// CHANGED : startSecondsを足した
 @Composable
-fun YoutubePlayer(
+fun YouTubePlayer(
     videoId: String,
-    startSeconds: Float,
-    modifier: Modifier,
+    modifier : Modifier = Modifier,
     onCurrentSecond: (second: Float) -> Unit = {}
 ) {
     YouTubePlayer(
         videoId = videoId,
-        startSeconds = startSeconds,
+        startSeconds = 0f,
         modifier = modifier,
         onCurrentSecond = onCurrentSecond
     )
