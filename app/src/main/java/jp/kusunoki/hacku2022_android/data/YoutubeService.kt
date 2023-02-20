@@ -1,34 +1,32 @@
 package jp.kusunoki.hacku2022_android.data
 
+import jp.kusunoki.hacku2022_android.BuildConfig
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface YoutubeService {
 
     companion object {
-        const val MAX_RESULT_VALUE = "maxResults"
-        const val MAX_RESULT = "&maxResults={maxResults}"
-        const val RELATED_TO_VIDEO_ID_VALUE = "relatedToVideoId"
-        const val RELATED_TO_VIDEO_ID = "&relatedToVideoId={relatedToVideoId}"
-        const val QUERY_VALUE = "q"
-        const val QUERY = "&q={q}"
+        private const val API_KEY = BuildConfig.YOUTUBE_API_KEY
+        const val DEFAULT_PARAM = "search?key=$API_KEY&part=snippet&type=video"
     }
 
-    @GET(MAX_RESULT)
+    @GET(DEFAULT_PARAM)
     suspend fun fetchVideoList(
-        @Path(MAX_RESULT_VALUE) max: Int = 5,
+        @Query("maxResults") max: Int = 5,
     ): Response<YoutubeList>
 
-    @GET("$MAX_RESULT$RELATED_TO_VIDEO_ID")
+    @GET(DEFAULT_PARAM)
     suspend fun fetchRelatedVideoList(
-        @Path(MAX_RESULT_VALUE) max: Int = 5,
-        @Path(RELATED_TO_VIDEO_ID_VALUE) videoId: String,
+        @Query("maxResults") max: Int = 5,
+        @Query("relatedToVideoId") videoId: String,
     ): Response<YoutubeList>
 
-    @GET("$MAX_RESULT$QUERY")
+    @GET(DEFAULT_PARAM)
     suspend fun fetchVideoList(
-        @Path(MAX_RESULT_VALUE) max: Int = 5,
-        @Path(QUERY_VALUE) query: String
+        @Query("maxResults") max: Int = 5,
+        @Query("q") query: String
     ): Response<YoutubeList>
 }

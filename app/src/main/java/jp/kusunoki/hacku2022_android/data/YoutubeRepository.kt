@@ -1,5 +1,9 @@
 package jp.kusunoki.hacku2022_android.data
 
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import jp.kusunoki.hacku2022_android.BuildConfig
 import jp.kusunoki.hacku2022_android.util.Future
 import jp.kusunoki.hacku2022_android.util.apiFlow
@@ -8,10 +12,13 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 import javax.inject.Inject
+import javax.inject.Singleton
 
-class YoutubeRepository @Inject constructor(
+
+interface YoutubeRepository {}
+class YoutubeRepositoryImpl @Inject constructor(
     private val youtubeService: YoutubeService
-) {
+): YoutubeRepository {
 
     // ランダムに動画のリストが返ってきます
     fun getVideoList(): Flow<Future<YoutubeList>> = apiFlow { youtubeService.fetchVideoList() }
@@ -40,4 +47,14 @@ class YoutubeRepository @Inject constructor(
     ): Flow<Future<YoutubeList>> = apiFlow {
         youtubeService.fetchVideoList(query = query)
     }
+}
+
+@Module
+@InstallIn(SingletonComponent::class)
+object YoutubeModule {
+    @Singleton
+    @Provides
+    fun provideYoutubeRepository(
+        youtubeService: YoutubeService
+    ): YoutubeRepository = YoutubeRepositoryImpl(youtubeService)
 }

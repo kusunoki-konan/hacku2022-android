@@ -17,8 +17,7 @@ class RetrofitModule {
     @Singleton
     @Provides
     fun provideRetrofit(moshi: Moshi): Retrofit {
-        val API_KEY = BuildConfig.YOUTUBE_API_KEY
-        val baseUrl = "https://www.googleapis.com/youtube/v3/search?key=$API_KEY&part=snippet&type=video"
+        val baseUrl = "https://www.googleapis.com/youtube/v3/"
 
         return Retrofit.Builder()
             .baseUrl(baseUrl)
