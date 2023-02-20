@@ -60,7 +60,7 @@ class MainActivity : ComponentActivity() {
                                 startDestination = Screen.Home.route
                             ) {
                                 composable(Screen.Home.route) {
-                                    HomeScreen ()
+                                    HomeScreen()
                                 }
                                 composable(Screen.History.route) {
                                     HistoryScreen()
