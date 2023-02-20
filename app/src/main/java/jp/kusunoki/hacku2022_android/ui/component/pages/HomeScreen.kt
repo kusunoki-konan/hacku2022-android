@@ -33,7 +33,6 @@ fun HomeScreen() {
         Column {
             val textFieldState = remember { mutableStateOf(TextFieldValue("")) }
             SearchBar(textFieldState = textFieldState) {
-                // TODO safe argsで安全に値渡しをしたい
                 val videoUrl = textFieldState.value.text
                 if (videoUrl.isNotEmpty()) {
                     // ?,/ に関しては URL エンコーディングを適応
