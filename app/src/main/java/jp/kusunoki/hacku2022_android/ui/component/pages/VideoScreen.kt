@@ -7,6 +7,7 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import jp.kusunoki.hacku2022_android.ui.CommentScreen
 import jp.kusunoki.hacku2022_android.ui.YouTubePlayer
 
 @Composable
@@ -16,7 +17,7 @@ fun VideoScreen(text: String = "") {
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.background
     ) {
-        Column() {
+        Column {
             val videoId = youtubeVideoId(text)
             val videoTime = youtubeTime(text)
             if (videoId != null) {
@@ -28,10 +29,12 @@ fun VideoScreen(text: String = "") {
                         startSeconds = videoTime
                     )
                 }
+                CommentScreen()
             }
             if (youtubeVideoId(text) == null) {
                 Text("その動画は存在しません")
             }
+
         }
     }
 }
