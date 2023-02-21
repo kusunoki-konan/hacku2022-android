@@ -17,13 +17,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import jp.kusunoki.hacku2022_android.LocalNavController
 import jp.kusunoki.hacku2022_android.Screen
 import jp.kusunoki.hacku2022_android.YoutubeCardList
 import jp.kusunoki.hacku2022_android.ui.SearchBar
+import jp.kusunoki.hacku2022_android.YoutubeCardList
+import jp.kusunoki.hacku2022_android.ui.viewmodel.HomeViewModel
+import timber.log.Timber
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
     // TODO: Home画面
     val navController = LocalNavController.current
     Surface(

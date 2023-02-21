@@ -25,6 +25,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import dagger.hilt.android.AndroidEntryPoint
 import jp.kusunoki.hacku2022_android.ui.component.pages.HistoryScreen
 import jp.kusunoki.hacku2022_android.ui.component.pages.HomeScreen
 import jp.kusunoki.hacku2022_android.ui.component.pages.VideoScreen
@@ -34,6 +35,7 @@ val LocalNavController = staticCompositionLocalOf<NavHostController> {
     error("No Current NavController")
 }
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
