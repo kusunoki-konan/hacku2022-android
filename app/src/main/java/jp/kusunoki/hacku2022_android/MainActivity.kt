@@ -11,7 +11,10 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
@@ -64,8 +67,11 @@ class MainActivity : ComponentActivity() {
                                 composable(Screen.History.route) {
                                     HistoryScreen()
                                 }
-                                composable(Screen.Video.route) {
-                                    VideoScreen()
+                                composable(
+                                    route = "${Screen.Video.route}/{videoUrl}",
+                                ) { backStackEntry ->
+                                    val videoUrl = backStackEntry.arguments?.getString("videoUrl") ?: ""
+                                    VideoScreen(videoUrl)
                                 }
                             }
                         }

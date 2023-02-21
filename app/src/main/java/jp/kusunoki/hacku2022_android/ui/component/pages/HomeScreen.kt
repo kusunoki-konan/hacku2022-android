@@ -9,16 +9,19 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.input.TextFieldValue
-import jp.kusunoki.hacku2022_android.ui.SearchBar
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import jp.kusunoki.hacku2022_android.LocalNavController
+import jp.kusunoki.hacku2022_android.Screen
+import jp.kusunoki.hacku2022_android.YoutubeCardList
+import jp.kusunoki.hacku2022_android.ui.SearchBar
 import jp.kusunoki.hacku2022_android.YoutubeCardList
 import jp.kusunoki.hacku2022_android.ui.viewmodel.HomeViewModel
 import timber.log.Timber
@@ -26,6 +29,7 @@ import timber.log.Timber
 @Composable
 fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
     // TODO: Home画面
+    val navController = LocalNavController.current
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.background,
@@ -33,7 +37,14 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
         Column {
             val textFieldState = remember { mutableStateOf(TextFieldValue("")) }
             SearchBar(textFieldState = textFieldState) {
-                // TODO 検索バーに入力された文字でYoutubeのAPIを叩く
+                val videoUrl = textFieldState.value.text
+                if (videoUrl.isNotEmpty()) {
+                    // ?,/ に関しては URL エンコーディングを適応
+                    val encodedUrl = videoUrl
+                        .replace("/", "%2F")
+                        .replace("?", "%3F")
+                    navController.navigate("${Screen.Video.route}/$encodedUrl")
+                }
             }
             val state = rememberScrollState()
             LaunchedEffect(Unit) {
