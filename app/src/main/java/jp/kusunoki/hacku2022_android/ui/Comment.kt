@@ -183,7 +183,7 @@ fun CommentSheet(videoNowTime: Float) {
                         shape = RoundedCornerShape(30.dp),
                         colors = ButtonDefaults.textButtonColors(
                             backgroundColor = Color.LightGray,
-                            contentColor = Color.Gray,
+                            contentColor = Color.Black,
                             disabledContentColor = Color.LightGray
                         ),
                     ) {
@@ -198,7 +198,7 @@ fun CommentSheet(videoNowTime: Float) {
                         shape = RoundedCornerShape(30.dp),
                         colors = ButtonDefaults.textButtonColors(
                             backgroundColor = Color(parseColor("#FFC34E")),
-                            contentColor = Color.Gray,
+                            contentColor = Color.Black,
                             disabledContentColor = Color(parseColor("#FFC34E"))
                         ),
                     ) {
