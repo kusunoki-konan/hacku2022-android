@@ -25,6 +25,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
@@ -74,25 +75,28 @@ fun CommentSheet(videoNowTime: Float) {
                 ) {
                     Text(
                         convertToTimeString(videoNowTime),
-                        style = MaterialTheme.typography.h6,
+                        style = MaterialTheme.typography.h5,
                         modifier = Modifier
                             .clickable { Timber.d("Clicked") }
-                            .padding(end = 8.dp),
+                            .padding(end = 8.dp,start = 8.dp),
+                        fontWeight = FontWeight.Bold,
                         textDecoration = TextDecoration.Underline
                     )
                     Text(
                         stringResource(R.string.to_question_comment),
                         style = MaterialTheme.typography.h6,
-                        modifier = Modifier.padding(end = 8.dp)
+                        modifier = Modifier.padding(end = 8.dp),
+                        fontWeight = FontWeight.Bold
                     )
                     Spacer(modifier = Modifier.weight(1f))
                     IconButton(
                         onClick = { coroutineScope.launch { sheetState.hide() } },
-                        modifier = Modifier.size(24.dp)
+                        modifier = Modifier.size(36.dp)
                     ) {
                         Icon(
                             Icons.Filled.Close,
-                            contentDescription = "Close"
+                            contentDescription = "Close",
+                            Modifier.fillMaxSize()
                         )
                     }
                 }
