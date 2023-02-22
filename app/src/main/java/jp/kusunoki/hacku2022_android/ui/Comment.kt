@@ -47,7 +47,7 @@ fun CommentSheet(videoNowTime:Float) {
     ModalBottomSheetLayout(
         sheetState = sheetState,
         sheetContent = { BottomSheet(videoNowTime) },
-        sheetShape = RoundedCornerShape(5),
+        sheetShape = RoundedCornerShape(5,5,0,0),
         modifier = Modifier.fillMaxSize(),
     ) {
         Row {
