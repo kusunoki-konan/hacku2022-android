@@ -81,7 +81,7 @@ fun CommentSheet(videoNowTime: Float) {
                         textDecoration = TextDecoration.Underline
                     )
                     Text(
-                        "に質問・コメント",
+                        stringResource(R.string.to_question_comment),
                         style = MaterialTheme.typography.h6,
                         modifier = Modifier.padding(end = 8.dp)
                     )
@@ -104,7 +104,7 @@ fun CommentSheet(videoNowTime: Float) {
                 OutlinedTextField(
                     value = text.value,
                     onValueChange = { text.value = it },
-                    placeholder = { Text("質問・コメントを追加") },
+                    placeholder = { Text(stringResource(R.string.question_add)) },
                     textStyle = TextStyle(
                         lineHeight = 18.sp,
                         color = Color.Black,
@@ -145,7 +145,7 @@ fun CommentSheet(videoNowTime: Float) {
                             disabledContentColor = Color.LightGray
                         ),
                     ) {
-                        Text("画像を添付")
+                        Text(stringResource(R.string.image_attach))
                     }
                     Button(
                         onClick = { Timber.d("clicked!") },
@@ -159,7 +159,7 @@ fun CommentSheet(videoNowTime: Float) {
                             disabledContentColor = Color.LightGray
                         ),
                     ) {
-                        Text("動画クリップを添付")
+                        Text(stringResource(R.string.video_attach))
                     }
                 }
                 Spacer(modifier = Modifier.height(250.dp))
@@ -183,7 +183,7 @@ fun CommentSheet(videoNowTime: Float) {
                             disabledContentColor = Color.LightGray
                         ),
                     ) {
-                        Text("キャンセル")
+                        Text(stringResource(R.string.cancel))
                     }
                     Button(
                         onClick = { Timber.d("clicked!") },
@@ -198,7 +198,7 @@ fun CommentSheet(videoNowTime: Float) {
                             disabledContentColor = Color(parseColor("#FFC34E"))
                         ),
                     ) {
-                        Text("送信")
+                        Text(stringResource(R.string.send))
                     }
                 }
             }
