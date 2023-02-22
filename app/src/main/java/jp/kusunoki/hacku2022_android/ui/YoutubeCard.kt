@@ -75,7 +75,7 @@ fun CardContent() {
                     .clip(CircleShape)
             )
             Text(
-                "youtuber講座あいうえおかきくけこ",
+                stringResource(R.string.channnel_title),
                 modifier = Modifier
                     .padding(4.dp)
                     .fillMaxWidth(),
@@ -85,7 +85,7 @@ fun CardContent() {
             )
         }
         Text(
-            "超人気youtuberから学ぶyoutuberになるには！あいうえおかきくけこ",
+            stringResource(R.string.video_title),
             style = MaterialTheme.typography.body2,
             modifier = Modifier
                 .padding(4.dp)

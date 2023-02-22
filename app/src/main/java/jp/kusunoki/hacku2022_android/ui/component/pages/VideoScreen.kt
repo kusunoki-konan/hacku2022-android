@@ -7,6 +7,8 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import jp.kusunoki.hacku2022_android.R
 import jp.kusunoki.hacku2022_android.ui.CommentSheet
 import jp.kusunoki.hacku2022_android.ui.YouTubePlayer
 
@@ -32,7 +34,7 @@ fun VideoScreen(text: String = "") {
                 CommentSheet(videoNowTime = 100.toFloat())//とりあえず仮で秒数を入れています。
             }
             if (youtubeVideoId(text) == null) {
-                Text("その動画は存在しません")
+                Text(stringResource(R.string.no_video))
             }
 
         }

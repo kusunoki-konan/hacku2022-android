@@ -13,18 +13,18 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import jp.kusunoki.hacku2022_android.LocalNavController
+import jp.kusunoki.hacku2022_android.R
 import jp.kusunoki.hacku2022_android.Screen
 import jp.kusunoki.hacku2022_android.YoutubeCardList
 import jp.kusunoki.hacku2022_android.ui.SearchBar
-import jp.kusunoki.hacku2022_android.YoutubeCardList
 import jp.kusunoki.hacku2022_android.ui.viewmodel.HomeViewModel
-import timber.log.Timber
 
 @Composable
 fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
@@ -59,21 +59,21 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
                         .verticalScroll(state)
                 ) {
                     Text(
-                        "おすすめの講座",
+                        stringResource(R.string.recommend_video),
                         fontWeight = FontWeight.Bold,
                         fontSize = 20.sp,
                         modifier = Modifier.padding(all = 8.dp)
                     )
                     YoutubeCardList()
                     Text(
-                        "新着の講座",
+                        stringResource(R.string.new_video),
                         fontWeight = FontWeight.Bold,
                         fontSize = 20.sp,
                         modifier = Modifier.padding(all = 8.dp)
                     )
                     YoutubeCardList()
                     Text(
-                        "人気の講座",
+                        stringResource(R.string.popular_video),
                         fontWeight = FontWeight.Bold,
                         fontSize = 20.sp,
                         modifier = Modifier.padding(all = 8.dp)

@@ -9,6 +9,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -33,7 +35,7 @@ import timber.log.Timber
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun CommentSheet(videoNowTime:Float) {
+fun CommentSheet(videoNowTime: Float) {
     val sheetState = rememberModalBottomSheetState(
         initialValue = ModalBottomSheetValue.Hidden,
         confirmStateChange = { it != ModalBottomSheetValue.HalfExpanded },
@@ -46,8 +48,162 @@ fun CommentSheet(videoNowTime:Float) {
 
     ModalBottomSheetLayout(
         sheetState = sheetState,
-        sheetContent = { BottomSheet(videoNowTime) },
-        sheetShape = RoundedCornerShape(5,5,0,0),
+        sheetContent = {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight()
+                    .padding(16.dp)
+            ) {
+                Button(
+                    onClick = { coroutineScope.launch { sheetState.hide() } },
+                    modifier = Modifier
+                        .height(5.dp)
+                        .width(48.dp)
+                        .align(Alignment.CenterHorizontally),
+                    shape = RoundedCornerShape(30.dp),
+                    colors = ButtonDefaults.textButtonColors(
+                        backgroundColor = Color.LightGray
+                    ),
+                    content = { }
+                )
+                Spacer(modifier = Modifier.height(18.dp))
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(
+                        convertToTimeString(videoNowTime),
+                        style = MaterialTheme.typography.h6,
+                        modifier = Modifier
+                            .clickable { Timber.d("Clicked") }
+                            .padding(end = 8.dp),
+                        textDecoration = TextDecoration.Underline
+                    )
+                    Text(
+                        "に質問・コメント",
+                        style = MaterialTheme.typography.h6,
+                        modifier = Modifier.padding(end = 8.dp)
+                    )
+                    Spacer(modifier = Modifier.weight(1f))
+                    IconButton(
+                        onClick = { coroutineScope.launch { sheetState.hide() } },
+                        modifier = Modifier.size(24.dp)
+                    ) {
+                        Icon(
+                            Icons.Filled.Close,
+                            contentDescription = "Close"
+                        )
+                    }
+                }
+                Spacer(modifier = Modifier.height(18.dp))
+                val focusManager = LocalFocusManager.current
+                val text = remember { mutableStateOf(TextFieldValue()) }
+                val textHeight = 18
+                val lineCount = 5
+                OutlinedTextField(
+                    value = text.value,
+                    onValueChange = { text.value = it },
+                    placeholder = { Text("質問・コメントを追加") },
+                    textStyle = TextStyle(
+                        lineHeight = 18.sp,
+                        color = Color.Black,
+                        fontSize = 18.sp
+                    ),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(with(LocalDensity.current) { (textHeight * (lineCount + 2)).sp.toDp() }) // 5行分:18×7
+                    ,
+                    singleLine = false,
+                    maxLines = 5,
+                    colors = TextFieldDefaults.outlinedTextFieldColors(
+                        focusedBorderColor = Color.LightGray,//フォーカスされたときの下線
+                        unfocusedBorderColor = Color.LightGray,//フォーカスされていないときの下線
+                        cursorColor = Color.Black,//カーソル
+                        backgroundColor = Color.White,//背景
+                    ),
+                    keyboardActions = KeyboardActions {
+                        focusManager.clearFocus()
+                    }
+                )
+                Row(
+                    modifier = Modifier
+                        .padding(vertical = 10.dp)
+                        .fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Button(
+                        onClick = { Timber.d("clicked!") },
+                        modifier = Modifier
+                            .height(36.dp)
+                            .width(180.dp)
+                            .padding(end = 8.dp),// 追加
+                        colors = ButtonDefaults.textButtonColors(
+                            backgroundColor = Color.LightGray,
+                            contentColor = Color.Gray,
+                            disabledContentColor = Color.LightGray
+                        ),
+                    ) {
+                        Text("画像を添付")
+                    }
+                    Button(
+                        onClick = { Timber.d("clicked!") },
+                        modifier = Modifier
+                            .height(36.dp)
+                            .width(180.dp)
+                            .padding(start = 8.dp),
+                        colors = ButtonDefaults.textButtonColors(
+                            backgroundColor = Color.LightGray,
+                            contentColor = Color.Gray,
+                            disabledContentColor = Color.LightGray
+                        ),
+                    ) {
+                        Text("動画クリップを添付")
+                    }
+                }
+                Spacer(modifier = Modifier.height(250.dp))
+                Row(
+                    modifier = Modifier
+                        .padding(vertical = 10.dp)
+                        .fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Button(
+                        onClick = { Timber.d("clicked!") },
+                        modifier = Modifier
+                            .height(48.dp)
+                            .width(160.dp)
+                            .padding(end = 8.dp),
+                        shape = RoundedCornerShape(30.dp),
+                        colors = ButtonDefaults.textButtonColors(
+                            backgroundColor = Color.LightGray,
+                            contentColor = Color.Gray,
+                            disabledContentColor = Color.LightGray
+                        ),
+                    ) {
+                        Text("キャンセル")
+                    }
+                    Button(
+                        onClick = { Timber.d("clicked!") },
+                        modifier = Modifier
+                            .height(48.dp)
+                            .width(160.dp)
+                            .padding(start = 8.dp),
+                        shape = RoundedCornerShape(30.dp),
+                        colors = ButtonDefaults.textButtonColors(
+                            backgroundColor = Color(parseColor("#FFC34E")),
+                            contentColor = Color.Gray,
+                            disabledContentColor = Color(parseColor("#FFC34E"))
+                        ),
+                    ) {
+                        Text("送信")
+                    }
+                }
+            }
+        },
+        sheetShape = RoundedCornerShape(5, 5, 0, 0),
         modifier = Modifier.fillMaxSize(),
     ) {
         Row {
@@ -78,137 +234,7 @@ fun CommentSheet(videoNowTime:Float) {
                     disabledContentColor = Color.LightGray
                 )
             ) {
-                Text("質問を追加")
-            }
-        }
-    }
-}
-
-@OptIn(ExperimentalMaterialApi::class)
-@Composable
-fun BottomSheet(videoNowTime: Float) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .fillMaxHeight()
-            .padding(16.dp)
-    ) {
-        Row {
-            Text(
-                convertToTimeString(videoNowTime),
-                style = MaterialTheme.typography.h6,
-                modifier = Modifier
-                    .clickable { Timber.d("Clicked") },
-                textDecoration = TextDecoration.Underline
-            )
-            Text(
-                "に質問・コメント",
-                style = MaterialTheme.typography.h6
-            )
-        }
-        Spacer(modifier = Modifier.height(18.dp))
-        val focusManager = LocalFocusManager.current
-        val text = remember { mutableStateOf(TextFieldValue()) }
-        val textHeight = 18
-        val lineCount = 5
-        OutlinedTextField(
-            value = text.value,
-            onValueChange = { text.value = it },
-            placeholder = { Text("質問・コメントを追加") },
-            textStyle = TextStyle(
-                lineHeight = 18.sp,
-                color = Color.Black,
-                fontSize = 18.sp
-            ),
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(with(LocalDensity.current) { (textHeight * (lineCount + 2)).sp.toDp() }) // 5行分:18×7
-            ,
-            singleLine = false,
-            maxLines = 5,
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                focusedBorderColor = Color.LightGray,//フォーカスされたときの下線
-                unfocusedBorderColor = Color.LightGray,//フォーカスされていないときの下線
-                cursorColor = Color.Black,//カーソル
-                backgroundColor = Color.White,//背景
-            ),
-            keyboardActions = KeyboardActions {
-                focusManager.clearFocus()
-            }
-        )
-        Row(
-            modifier = Modifier
-                .padding(vertical = 10.dp)
-                .fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Button(
-                onClick = { println("clicked!") },
-                modifier = Modifier
-                    .height(36.dp)
-                    .width(180.dp)
-                    .padding(end = 8.dp),// 追加
-                colors = ButtonDefaults.textButtonColors(
-                    backgroundColor = Color.LightGray,
-                    contentColor = Color.Gray,
-                    disabledContentColor = Color.LightGray
-                ),
-            ) {
-                Text("画像を添付")
-            }
-            Button(
-                onClick = { println("clicked!") },
-                modifier = Modifier
-                    .height(36.dp)
-                    .width(180.dp)
-                    .padding(start = 8.dp),
-                colors = ButtonDefaults.textButtonColors(
-                    backgroundColor = Color.LightGray,
-                    contentColor = Color.Gray,
-                    disabledContentColor = Color.LightGray
-                ),
-            ) {
-                Text("動画クリップを添付")
-            }
-        }
-        Spacer(modifier = Modifier.height(250.dp))
-        Row(
-            modifier = Modifier
-                .padding(vertical = 10.dp)
-                .fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Button(
-                onClick = { println("clicked!") },
-                modifier = Modifier
-                    .height(48.dp)
-                    .width(160.dp)
-                    .padding(end = 8.dp),
-                shape = RoundedCornerShape(30.dp),
-                colors = ButtonDefaults.textButtonColors(
-                    backgroundColor = Color.LightGray,
-                    contentColor = Color.Gray,
-                    disabledContentColor = Color.LightGray
-                ),
-            ) {
-                Text("キャンセル")
-            }
-            Button(
-                onClick = { println("clicked!") },
-                modifier = Modifier
-                    .height(48.dp)
-                    .width(160.dp)
-                    .padding(start = 8.dp),
-                shape = RoundedCornerShape(30.dp),
-                colors = ButtonDefaults.textButtonColors(
-                    backgroundColor = Color(parseColor("#FFC34E")),
-                    contentColor = Color.Gray,
-                    disabledContentColor = Color(parseColor("#FFC34E"))
-                ),
-            ) {
-                Text("送信")
+                Text(stringResource(R.string.question_add))
             }
         }
     }
