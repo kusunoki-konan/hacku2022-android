@@ -21,6 +21,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextDecoration
@@ -28,10 +29,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import jp.kusunoki.hacku2022_android.R
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun CommentScreen() {
+fun CommentSheet(videoNowTime:Float) {
     val sheetState = rememberModalBottomSheetState(
         initialValue = ModalBottomSheetValue.Hidden,
         confirmStateChange = { it != ModalBottomSheetValue.HalfExpanded },
@@ -44,14 +46,14 @@ fun CommentScreen() {
 
     ModalBottomSheetLayout(
         sheetState = sheetState,
-        sheetContent = { BottomSheet() },
+        sheetContent = { BottomSheet(videoNowTime) },
         sheetShape = RoundedCornerShape(5),
         modifier = Modifier.fillMaxSize(),
     ) {
         Row {
             Image(
                 painter = painterResource(id = R.drawable.circle),
-                contentDescription = "チャンネル画像",
+                contentDescription = stringResource(R.string.channel_image),
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .padding(horizontal = 8.dp, vertical = 12.dp)
@@ -84,7 +86,7 @@ fun CommentScreen() {
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun BottomSheet() {
+fun BottomSheet(videoNowTime: Float) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -93,10 +95,10 @@ fun BottomSheet() {
     ) {
         Row {
             Text(
-                "01:14",
+                convertToTimeString(videoNowTime),
                 style = MaterialTheme.typography.h6,
                 modifier = Modifier
-                    .clickable { println("Clicked") },
+                    .clickable { Timber.d("Clicked") },
                 textDecoration = TextDecoration.Underline
             )
             Text(
@@ -211,3 +213,15 @@ fun BottomSheet() {
         }
     }
 }
+
+fun convertToTimeString(sumSeconds: Float): String {
+    val hours = (sumSeconds / 3600).toInt()
+    val minutes = ((sumSeconds / 60) % 60).toInt()
+    val secs = (sumSeconds % 60).toInt()
+    return if (hours > 0) {
+        "%02d:%02d:%02d".format(hours, minutes, secs)
+    } else {
+        "%02d:%02d".format(minutes, secs)
+    }
+}
+
