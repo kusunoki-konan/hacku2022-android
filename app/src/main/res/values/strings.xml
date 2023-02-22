@@ -5,4 +5,5 @@
     <string name="home_screen">Home</string>
     <string name="history_screen">History</string>
     <string name="channel_image">チャンネル画像</string>
+    <string name="samune_image">サムネ画像</string>
 </resources>
