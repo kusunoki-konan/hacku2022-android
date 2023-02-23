@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -50,7 +51,7 @@ fun HistoryCardContent() {
     Row {
         Image(
             painter = painterResource(id = R.drawable.image),
-            contentDescription = "サムネ画像",
+            contentDescription = stringResource(R.string.samune_image),
             modifier = Modifier
                 .padding(8.dp)
                 .height(118.dp)
@@ -60,7 +61,7 @@ fun HistoryCardContent() {
         )
         Column {
             Text(
-                "タイトルタイトルタイトルタイトル",
+                stringResource(R.string.video_title),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(4.dp),
@@ -70,7 +71,7 @@ fun HistoryCardContent() {
                 overflow = TextOverflow.Ellipsis // 最大行数を超えた場合に末尾を省略する
             )
             Text(
-                "チャンネルチャンネルチャンネルチャンネルチャンネル",
+                stringResource(R.string.channnel_title),
                 style = MaterialTheme.typography.body2,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -79,7 +80,7 @@ fun HistoryCardContent() {
                 overflow = TextOverflow.Ellipsis // 最大行数を超えた場合に末尾を省略する
             )
             Text(
-                "mm月ss日に視聴",
+                stringResource(R.string.when_play),
                 style = MaterialTheme.typography.caption,
                 modifier = Modifier
                     .fillMaxWidth()

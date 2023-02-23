@@ -10,10 +10,12 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import jp.kusunoki.hacku2022_android.HistoryYoutubeCardList
+import jp.kusunoki.hacku2022_android.R
 
 @Composable
 fun HistoryScreen() {
@@ -28,7 +30,7 @@ fun HistoryScreen() {
                 .horizontalScroll(state)
         ) {
             Text(
-                "再生履歴",
+                stringResource(R.string.play_history),
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp,
                 modifier = Modifier

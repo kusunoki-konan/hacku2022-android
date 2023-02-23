@@ -4,9 +4,10 @@
     <!-- Navigation Label -->
     <string name="home_screen">ホーム</string>
     <string name="history_screen">再生履歴</string>
+    <!-- Comment and HistroyYoutubeCard-->
+    <string name="samune_image">サムネ画像</string>
     <!-- Comment-->
     <string name="channel_image">チャンネル画像</string>
-    <string name="samune_image">サムネ画像</string>
     <string name="question_add">質問を追加</string>
     <string name="question_comment_add">質問・コメントを追加</string>
     <string name="to_question_comment">に質問・コメント</string>
@@ -14,9 +15,11 @@
     <string name="video_attach">動画クリップを添付</string>
     <string name="send">送信</string>
     <string name="cancel">キャンセル</string>
-    <!--YoutubeCard-->
-    <string name="video_title">超人気youtuberから学ぶyoutuberになるには！あいうえおかきくけこ</string>
-    <string name="channnel_title">youtuber講座あいうえおかきくけこ</string>
+    <!--YoutubeCard and HistroyYoutubeCard-->
+    <string name="video_title">タイトルタイトルタイトルタイトルタイトルタイトル</string>
+    <string name="channnel_title">チャンネルチャンネルチャンネルチャンネルチャンネル</string>
+    <!--HistoryYoutubeCard-->
+    <string name="when_play">mm月ss日に視聴</string>
     <!--SearchBar-->
     <string name="video_url_search">動画のURLを張り付けて検索</string>
     <!--HomeScreen-->
@@ -25,4 +28,6 @@
     <string name="popular_video">人気の動画</string>
     <!--VideoScreen-->
     <string name="no_video">その動画は存在しません</string>
+    <!--HistoryScreen-->
+    <string name="play_history">再生履歴</string>
 </resources>
