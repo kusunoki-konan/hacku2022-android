@@ -1,6 +1,8 @@
 package jp.kusunoki.hacku2022_android.ui
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.material.*
@@ -12,12 +14,12 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
+import jp.kusunoki.hacku2022_android.R
 
 @Composable
 fun SearchBar(
@@ -31,7 +33,7 @@ fun SearchBar(
         onValueChange = { value ->
             textFieldState.value = value
         },
-        placeholder = { Text("動画のURLを張り付けて検索") },
+        placeholder = { Text(stringResource(R.string.video_url_search)) },
         shape = MaterialTheme.shapes.medium.copy(CornerSize(16.dp)),
         modifier = Modifier
             .fillMaxWidth()
