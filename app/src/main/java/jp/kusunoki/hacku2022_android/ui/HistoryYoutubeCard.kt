@@ -1,6 +1,5 @@
 package jp.kusunoki.hacku2022_android
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -19,17 +18,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-
-@Composable
-fun HistoryYoutubeCardList() {
-    LazyColumn {
-        items(10) {
-            HistoryYoutubeCard(onCardClicked = {
-                Log.d("YoutubeCard", "Card clicked!")
-            })
-        }
-    }
-}
+import timber.log.Timber
 
 @Composable
 fun HistoryYoutubeCard(onCardClicked: () -> Unit) {
@@ -42,52 +31,47 @@ fun HistoryYoutubeCard(onCardClicked: () -> Unit) {
         backgroundColor = MaterialTheme.colors.surface,
         elevation = 0.dp
     ) {
-        HistoryCardContent()
-    }
-}
-
-@Composable
-fun HistoryCardContent() {
-    Row {
-        Image(
-            painter = painterResource(id = R.drawable.image),
-            contentDescription = stringResource(R.string.samune_image),
-            modifier = Modifier
-                .padding(8.dp)
-                .height(118.dp)
-                .width(215.dp),
-            alignment = Alignment.Center,
-            contentScale = ContentScale.Crop
-        )
-        Column {
-            Text(
-                stringResource(R.string.video_title),
+        Row {
+            Image(
+                painter = painterResource(id = R.drawable.image),
+                contentDescription = stringResource(R.string.samune_image),
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(4.dp),
-                style = MaterialTheme.typography.body1,
-                fontWeight = FontWeight.Bold,
-                maxLines = 1, // 最大1行に制限する
-                overflow = TextOverflow.Ellipsis // 最大行数を超えた場合に末尾を省略する
+                    .padding(8.dp)
+                    .height(118.dp)
+                    .width(215.dp),
+                alignment = Alignment.Center,
+                contentScale = ContentScale.Crop
             )
-            Text(
-                stringResource(R.string.channnel_title),
-                style = MaterialTheme.typography.body2,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(4.dp),
-                maxLines = 1, // 最大1行に制限する
-                overflow = TextOverflow.Ellipsis // 最大行数を超えた場合に末尾を省略する
-            )
-            Text(
-                stringResource(R.string.when_play),
-                style = MaterialTheme.typography.caption,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(4.dp),
-                maxLines = 1, // 最大1行に制限する
-                overflow = TextOverflow.Ellipsis // 最大行数を超えた場合に末尾を省略する
-            )
+            Column {
+                Text(
+                    stringResource(R.string.video_title),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(4.dp),
+                    style = MaterialTheme.typography.body1,
+                    fontWeight = FontWeight.Bold,
+                    maxLines = 1, // 最大1行に制限する
+                    overflow = TextOverflow.Ellipsis // 最大行数を超えた場合に末尾を省略する
+                )
+                Text(
+                    stringResource(R.string.channnel_title),
+                    style = MaterialTheme.typography.body2,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(4.dp),
+                    maxLines = 1, // 最大1行に制限する
+                    overflow = TextOverflow.Ellipsis // 最大行数を超えた場合に末尾を省略する
+                )
+                Text(
+                    stringResource(R.string.when_play),
+                    style = MaterialTheme.typography.caption,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(4.dp),
+                    maxLines = 1, // 最大1行に制限する
+                    overflow = TextOverflow.Ellipsis // 最大行数を超えた場合に末尾を省略する
+                )
+            }
         }
     }
 }

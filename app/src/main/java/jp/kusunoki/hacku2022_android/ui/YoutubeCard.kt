@@ -46,52 +46,48 @@ fun YoutubeCard(onCardClicked: () -> Unit) {
         backgroundColor= MaterialTheme.colors.surface,
         elevation = 8.dp
     ) {
-        CardContent()
-    }
-}
-@Composable
-fun CardContent() {
-    Column(modifier = Modifier.fillMaxWidth()) {
-        Image(
-            painter = painterResource(R.drawable.image),
-            contentDescription = stringResource(R.string.samune_image),
-            modifier = Modifier
-                .height(118.dp)
-                .width(215.dp),
-            alignment = Alignment.Center,
-            contentScale = ContentScale.Crop
-        )
-        Row(verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .fillMaxWidth()
-        ){
+        Column(modifier = Modifier.fillMaxWidth()) {
             Image(
-                painter = painterResource(id = R.drawable.circle),
-                contentDescription = stringResource(R.string.channel_image),
-                contentScale = ContentScale.Crop,
+                painter = painterResource(R.drawable.image),
+                contentDescription = stringResource(R.string.samune_image),
                 modifier = Modifier
-                    .padding(4.dp)
-                    .size(32.dp)
-                    .clip(CircleShape)
+                    .height(118.dp)
+                    .width(215.dp),
+                alignment = Alignment.Center,
+                contentScale = ContentScale.Crop
             )
+            Row(verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .fillMaxWidth()
+            ){
+                Image(
+                    painter = painterResource(id = R.drawable.circle),
+                    contentDescription = stringResource(R.string.channel_image),
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .padding(4.dp)
+                        .size(32.dp)
+                        .clip(CircleShape)
+                )
+                Text(
+                    stringResource(R.string.channnel_title),
+                    modifier = Modifier
+                        .padding(4.dp)
+                        .fillMaxWidth(),
+                    style = MaterialTheme.typography.subtitle1 ,
+                    maxLines = 1, // 最大1行に制限する
+                    overflow = TextOverflow.Ellipsis // 最大行数を超えた場合に末尾を省略する
+                )
+            }
             Text(
-                stringResource(R.string.channnel_title),
+                stringResource(R.string.video_title),
+                style = MaterialTheme.typography.body2,
                 modifier = Modifier
                     .padding(4.dp)
                     .fillMaxWidth(),
-                style = MaterialTheme.typography.subtitle1 ,
-                maxLines = 1, // 最大1行に制限する
+                maxLines = 2, // 最大2行に制限する
                 overflow = TextOverflow.Ellipsis // 最大行数を超えた場合に末尾を省略する
             )
         }
-        Text(
-            stringResource(R.string.video_title),
-            style = MaterialTheme.typography.body2,
-            modifier = Modifier
-                .padding(4.dp)
-                .fillMaxWidth(),
-            maxLines = 2, // 最大2行に制限する
-            overflow = TextOverflow.Ellipsis // 最大行数を超えた場合に末尾を省略する
-        )
     }
 }
