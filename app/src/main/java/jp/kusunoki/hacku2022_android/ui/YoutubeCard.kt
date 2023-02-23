@@ -85,7 +85,7 @@ fun CardContent() {
         }
         Text(
             "超人気youtuberから学ぶyoutuberになるには！あいうえおかきくけこ",
-            style = MaterialTheme.typography.body2,
+            style = MaterialTheme.typography.subtitle1,
             modifier = Modifier
                 .padding(4.dp)
                 .fillMaxWidth(),
