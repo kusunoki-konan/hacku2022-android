@@ -2,6 +2,6 @@
     <string name="app_name">hacku2022-android</string>
 
     <!-- Navigation Label -->
-    <string name="home_screen">Home</string>
-    <string name="history_screen">History</string>
+    <string name="home_screen">ホーム</string>
+    <string name="history_screen">再生履歴</string>
 </resources>
