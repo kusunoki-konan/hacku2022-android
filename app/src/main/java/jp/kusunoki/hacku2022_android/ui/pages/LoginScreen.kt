@@ -21,8 +21,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import jp.kusunoki.hacku2022_android.LocalNavController
 import jp.kusunoki.hacku2022_android.R
+import jp.kusunoki.hacku2022_android.Screen
 import jp.kusunoki.hacku2022_android.util.rememberFirebaseAuthLauncher
+import timber.log.Timber
 
 @Composable
 fun LoginScreen() {
@@ -58,16 +61,18 @@ fun LoginScreen() {
                     Image(painter = painterResource(id = R.drawable.image), "")
                     Text("Sign in")
                 }
-
             }
         } else {
-            Text("Welcome ${user.value!!.displayName}")
-            Button(onClick = {
-                Firebase.auth.signOut()
-                user.value = null
-            }) {
-                Text("Sign out")
-            }
+            val navController = LocalNavController.current
+            navController.navigate(Screen.Home.route)
+
+//            Text("Welcome ${user.value!!.displayName}")
+//            Button(onClick = {
+//                Firebase.auth.signOut()
+//                user.value = null
+//            }) {
+//                Text("Sign out")
+//            }
         }
     }
 }

@@ -19,17 +19,20 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import jp.kusunoki.hacku2022_android.LocalNavController
 import jp.kusunoki.hacku2022_android.R
 import jp.kusunoki.hacku2022_android.Screen
 import jp.kusunoki.hacku2022_android.ui.parts.YoutubeCardList
 import jp.kusunoki.hacku2022_android.ui.parts.SearchBar
 import jp.kusunoki.hacku2022_android.ui.viewmodel.HomeViewModel
+import timber.log.Timber
 
 @Composable
 fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
-    // TODO: Home画面
     val navController = LocalNavController.current
+
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.background,

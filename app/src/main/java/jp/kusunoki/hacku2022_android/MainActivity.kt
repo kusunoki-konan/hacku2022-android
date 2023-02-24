@@ -65,7 +65,7 @@ class MainActivity : ComponentActivity() {
                         ) {
                             NavHost(
                                 navController = LocalNavController.current,
-                                startDestination = Screen.Home.route
+                                startDestination = Screen.Login.route
                             ) {
                                 composable(Screen.Login.route) {
                                     LoginScreen()
