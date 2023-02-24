@@ -3,7 +3,6 @@ package jp.kusunoki.hacku2022_android
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -18,7 +17,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import timber.log.Timber
 
 @Composable
 fun HistoryYoutubeCard(onCardClicked: () -> Unit) {
@@ -37,8 +35,8 @@ fun HistoryYoutubeCard(onCardClicked: () -> Unit) {
                 contentDescription = stringResource(R.string.samune_image),
                 modifier = Modifier
                     .padding(8.dp)
-                    .height(118.dp)
-                    .width(215.dp),
+                    .height(112.5.dp)
+                    .width(200.dp),
                 alignment = Alignment.Center,
                 contentScale = ContentScale.Crop
             )

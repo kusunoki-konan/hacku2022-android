@@ -51,8 +51,8 @@ fun YoutubeCard(onCardClicked: () -> Unit) {
                 painter = painterResource(R.drawable.image),
                 contentDescription = stringResource(R.string.samune_image),
                 modifier = Modifier
-                    .height(118.dp)
-                    .width(215.dp),
+                    .height(112.5.dp)
+                    .width(200.dp),
                 alignment = Alignment.Center,
                 contentScale = ContentScale.Crop
             )
