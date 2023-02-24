@@ -4,29 +4,31 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.room.TypeConverter
 import jp.kusunoki.hacku2022_android.Greeting
 import jp.kusunoki.hacku2022_android.HistoryEntity
 import jp.kusunoki.hacku2022_android.HistoryViewModel
+import timber.log.Timber
 import java.util.*
 
 @Composable
-fun HistoryScreen() {
-    val historyViewModel: HistoryViewModel = viewModel()
+fun HistoryScreen(viewModel: HistoryViewModel = hiltViewModel()) {
+    viewModel.refresh()
     // TODO: 履歴画面
     // データの挿入
-    val history1 = HistoryEntity(0, "videoId", "title", "thumbnailPath", Date())
-    historyViewModel.insert(history1)
+    val historyEntity = HistoryEntity(0, "videoId", "title", "thumbnailPath", Date())
+    viewModel.insert(historyEntity)
 
     // データの更新
-    val history2 = historyViewModel.history.value?.get(0) // 更新するデータを取得する
-    history2?.title = "updated title"
-    history2?.let { historyViewModel.update(it) }
+    // historyListに入っているのはListを変換してStateにして入れている
+    val historyList = viewModel.historyList.observeAsState() // 更新するデータを取得する
+    Timber.d("$historyList")
     // データの削除
-    historyViewModel.deleteAll()
-
+//    viewModel.deleteAll()
+    Timber.d("ログ確認")
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.background

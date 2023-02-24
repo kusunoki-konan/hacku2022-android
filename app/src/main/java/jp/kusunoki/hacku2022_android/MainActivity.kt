@@ -30,6 +30,7 @@ import jp.kusunoki.hacku2022_android.ui.component.pages.HistoryScreen
 import jp.kusunoki.hacku2022_android.ui.component.pages.HomeScreen
 import jp.kusunoki.hacku2022_android.ui.component.pages.VideoScreen
 import jp.kusunoki.hacku2022_android.ui.theme.Hacku2022androidTheme
+import timber.log.Timber
 
 val LocalNavController = staticCompositionLocalOf<NavHostController> {
     error("No Current NavController")
@@ -62,9 +63,11 @@ class MainActivity : ComponentActivity() {
                                 startDestination = Screen.Home.route
                             ) {
                                 composable(Screen.Home.route) {
+                                    Timber.d("MainActivityのHomeScreen")
                                     HomeScreen()
                                 }
                                 composable(Screen.History.route) {
+                                    Timber.d("MainActivityのHistoryScreen")
                                     HistoryScreen()
                                 }
                                 composable(

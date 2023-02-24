@@ -8,7 +8,7 @@ import java.util.*
 data class HistoryEntity(
     @PrimaryKey(autoGenerate = true) val id: Int,
     val videoId: String,
-    var title: String,
+    val title: String,
     val thumbnailPath: String,
     val watchDate: Date
 )
