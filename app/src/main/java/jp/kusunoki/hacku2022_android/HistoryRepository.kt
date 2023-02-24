@@ -18,7 +18,7 @@ class HistoryRepositoryImpl @Inject constructor(private val historyDao: HistoryD
     fun getAllHistory(): LiveData<List<HistoryEntity>> {
         return MutableLiveData(historyDao.getAllHistory())
     }
-    // ランダムに動画のリストが返ってきます
+
     fun getHistoryList(): Flow<Future<List<HistoryEntity>>> = localFlow { historyDao.getAllHistory() }
 
     suspend fun insert(history: HistoryEntity) {

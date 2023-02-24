@@ -1,5 +1,6 @@
 package jp.kusunoki.hacku2022_android.ui.component.pages
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -12,6 +13,7 @@ import androidx.room.TypeConverter
 import jp.kusunoki.hacku2022_android.HistoryViewModel
 import timber.log.Timber
 import java.util.*
+
 
 @Composable
 fun HistoryScreen(viewModel: HistoryViewModel = hiltViewModel()) {
@@ -27,12 +29,13 @@ fun HistoryScreen(viewModel: HistoryViewModel = hiltViewModel()) {
 //    Timber.d("$historyList")
     // データの削除
 //    viewModel.deleteAll()
-    Timber.d("ログ確認")
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.background
     ) {
-        Text("${historyList.value}")
+        Column{
+            Text("${historyList.value?.let { it -> Timber.d("${it}") }}")
+        }
     }
 }
 class Converters {
