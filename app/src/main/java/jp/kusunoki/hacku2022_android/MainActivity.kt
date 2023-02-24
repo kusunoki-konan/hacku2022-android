@@ -9,8 +9,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.List
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
@@ -88,7 +88,7 @@ class MainActivity : ComponentActivity() {
 
 sealed class Screen(val route: String, val icon: ImageVector = Icons.Default.Home, @StringRes val resourceId: Int = R.string.app_name) {
     object Home: Screen("home", Icons.Default.Home, R.string.home_screen)
-    object History: Screen("history", Icons.Default.List, R.string.history_screen)
+    object History: Screen("history", Icons.Default.History, R.string.history_screen)
     object Video: Screen("video")
 }
 
