@@ -1,7 +1,6 @@
 package jp.kusunoki.hacku2022_android.ui.component.pages
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
@@ -29,10 +28,7 @@ fun HistoryScreen() {
             },
             content = {
                 val state = rememberScrollState()
-                LazyColumn(
-                    modifier = Modifier
-                        .horizontalScroll(state)
-                ) {
+                LazyColumn{
                     items(10) {
                         HistoryYoutubeCard(onCardClicked = {
                             Timber.d("Card clicked!")
