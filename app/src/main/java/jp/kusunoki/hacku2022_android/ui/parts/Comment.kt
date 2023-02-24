@@ -36,7 +36,11 @@ import timber.log.Timber
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun CommentSheet(videoNowTime: Float) {
+fun CommentSheet(
+    videoNowTime: Float,
+    onTapContent: () -> Unit = {},
+    onReturnPlayer: () -> Unit = {}
+) {
     val sheetState = rememberModalBottomSheetState(
         initialValue = ModalBottomSheetValue.Hidden,
         confirmStateChange = { it != ModalBottomSheetValue.HalfExpanded },
@@ -45,7 +49,10 @@ fun CommentSheet(videoNowTime: Float) {
     val coroutineScope = rememberCoroutineScope()
 
     BackHandler(sheetState.isVisible) {
-        coroutineScope.launch { sheetState.hide() }
+        coroutineScope.launch {
+            sheetState.hide()
+            onReturnPlayer()
+        }
     }
 
     ModalBottomSheetLayout(
@@ -54,7 +61,10 @@ fun CommentSheet(videoNowTime: Float) {
             CommentSheetContent(
                 videoNowTime = videoNowTime,
                 onSheetHide = {
-                    coroutineScope.launch { sheetState.hide() }
+                    coroutineScope.launch {
+                        sheetState.hide()
+                        onReturnPlayer()
+                    }
                 }
             )
         },
@@ -74,8 +84,12 @@ fun CommentSheet(videoNowTime: Float) {
             Button(
                 onClick = {
                     coroutineScope.launch {
-                        if (sheetState.isVisible) sheetState.hide()
-                        else sheetState.show()
+                        if (sheetState.isVisible) {
+                            sheetState.hide()
+                        } else {
+                            onTapContent()
+                            sheetState.show()
+                        }
                     }
                 },
                 modifier = Modifier
@@ -112,7 +126,7 @@ fun CommentSheetContent(
         val lineCount = 5
 
         Button(
-            onClick = { onSheetHide() },
+            onClick = {  },
             modifier = Modifier
                 .height(5.dp)
                 .width(48.dp)

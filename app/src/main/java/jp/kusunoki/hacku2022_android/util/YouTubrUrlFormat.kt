@@ -26,7 +26,7 @@ fun String.youtubeVideoId(): String {
         }
         else -> { null }
     }
-    return matchResult?.value ?: ""
+    return matchResult?.value ?: this
 }
 
 fun String.youtubeTime(): Float {

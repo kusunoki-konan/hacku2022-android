@@ -6,6 +6,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 
 /** AndroidViewと有志のライブラリを使用したYoutube Player.
@@ -18,9 +19,11 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTube
 @Composable
 fun YouTubePlayer(
     videoId: String,
-    startSeconds: Float,
+    startSeconds: Float = 0f,
     modifier : Modifier = Modifier,
-    onCurrentSecond: (second: Float) -> Unit = {}
+    onReady: (youtubePlayer: YouTubePlayer) -> Unit = {},
+    onStateChange: (state: PlayerConstants.PlayerState) -> Unit = {},
+    onCurrentSecond: (second: Float) -> Unit = {},
 ) {
     AndroidView(
         modifier = modifier,
@@ -32,6 +35,7 @@ fun YouTubePlayer(
                     override fun onReady(youTubePlayer: YouTubePlayer) {
                         super.onReady(youTubePlayer)
                         youTubePlayer.loadVideo(videoId, startSeconds)
+                        onReady(youTubePlayer)
                     }
 
                     // Playerの状態が変更された時に呼ばれ、状態を取得可能(PLAYINGやPAUSED)
@@ -41,6 +45,7 @@ fun YouTubePlayer(
                         state: PlayerConstants.PlayerState
                     ) {
                         super.onStateChange(youTubePlayer, state)
+                        onStateChange(state)
                     }
 
                     // 再生中の総秒数が取得可能
@@ -52,20 +57,5 @@ fun YouTubePlayer(
             )
             view
         }
-    )
-}
-
-// 一番シンプルなYoutubePlayer
-@Composable
-fun YouTubePlayer(
-    videoId: String,
-    modifier : Modifier = Modifier,
-    onCurrentSecond: (second: Float) -> Unit = {}
-) {
-    YouTubePlayer(
-        videoId = videoId,
-        startSeconds = 0f,
-        modifier = modifier,
-        onCurrentSecond = onCurrentSecond
     )
 }

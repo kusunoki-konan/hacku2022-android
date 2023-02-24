@@ -29,6 +29,7 @@ import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import jp.kusunoki.hacku2022_android.ui.pages.HistoryScreen
 import jp.kusunoki.hacku2022_android.ui.pages.HomeScreen
+import jp.kusunoki.hacku2022_android.ui.pages.LoginScreen
 import jp.kusunoki.hacku2022_android.ui.pages.VideoScreen
 import jp.kusunoki.hacku2022_android.ui.theme.Hacku2022androidTheme
 import jp.kusunoki.hacku2022_android.ui.theme.Primary
@@ -66,6 +67,9 @@ class MainActivity : ComponentActivity() {
                                 navController = LocalNavController.current,
                                 startDestination = Screen.Home.route
                             ) {
+                                composable(Screen.Login.route) {
+                                    LoginScreen()
+                                }
                                 composable(Screen.Home.route) {
                                     HomeScreen()
                                 }
@@ -92,6 +96,7 @@ class MainActivity : ComponentActivity() {
 }
 
 sealed class Screen(val route: String, val icon: ImageVector = Icons.Default.Home, @StringRes val resourceId: Int = R.string.app_name) {
+    object Login: Screen("login")
     object Home: Screen("home", Icons.Default.Home, R.string.home_screen)
     object History: Screen("history", Icons.Default.History, R.string.history_screen)
     object Video: Screen("video")
@@ -110,14 +115,17 @@ fun MainBottomNavigation() {
     if(homeOrHistory == true) {
         BottomNavigation(
             // コメントアウトは従来のデザイン
-            backgroundColor = Color.White,
-            contentColor = Primary
+            backgroundColor = Color.White
         ) {
             items.forEach { screen ->
                 val selected = currentDestination.hierarchy.any { it.route == screen.route }
                 BottomNavigationItem(
                     icon = {
-                        Icon(screen.icon, contentDescription = null)
+                        Icon(
+                            screen.icon,
+                            contentDescription = null,
+                            tint = if(selected) Primary else Color.LightGray
+                        )
                     },
                     label = {
                         Text(
