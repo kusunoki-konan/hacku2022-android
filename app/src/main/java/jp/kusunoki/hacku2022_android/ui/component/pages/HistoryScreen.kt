@@ -10,6 +10,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.room.TypeConverter
+import jp.kusunoki.hacku2022_android.HistoryEntity
 import jp.kusunoki.hacku2022_android.HistoryViewModel
 import java.util.*
 
@@ -19,12 +20,12 @@ fun HistoryScreen(viewModel: HistoryViewModel = hiltViewModel()) {
     viewModel.refresh()
     // TODO: 履歴画面
     // データの挿入
-//    val historyEntity = HistoryEntity(0, "videoId", "title", "thumbnailPath", Date())
+    val historyEntity = HistoryEntity(0, "videoId", "title", "thumbnailPath", Date())
 //    viewModel.insert(historyEntity)
 
     // データの更新
     // historyListに入っているのはListを変換してStateにして入れている
-    val historyList = viewModel.historyList.observeAsState() // 更新するデータを取得する
+    val historyListState = viewModel.historyList.observeAsState() // 更新するデータを取得する
 //    Timber.d("$historyList")
     // データの削除
 //    viewModel.deleteAll()
@@ -33,7 +34,8 @@ fun HistoryScreen(viewModel: HistoryViewModel = hiltViewModel()) {
         color = MaterialTheme.colors.background
     ) {
         Column{
-            Text("${historyList.value}")
+            val historyFutureList = historyListState.value
+            Text("$historyFutureList")
         }
     }
 }
