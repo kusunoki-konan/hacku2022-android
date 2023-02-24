@@ -8,12 +8,16 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.hilt.navigation.compose.hiltViewModel
+import jp.kusunoki.hacku2022_android.HistoryEntity
+import jp.kusunoki.hacku2022_android.HistoryViewModel
 import jp.kusunoki.hacku2022_android.R
 import jp.kusunoki.hacku2022_android.ui.CommentSheet
 import jp.kusunoki.hacku2022_android.ui.YouTubePlayer
+import java.util.*
 
 @Composable
-fun VideoScreen(text: String = "") {
+fun VideoScreen(text: String = "",viewModel: HistoryViewModel = hiltViewModel()) {
     // TODO: 動画再生画面
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -30,7 +34,12 @@ fun VideoScreen(text: String = "") {
                         videoId = "$videoId",
                         startSeconds = videoTime
                     )
+                    viewModel.refresh()
+                    // TODO: 履歴画面
                 }
+                // データの挿入
+                val historyEntity = HistoryEntity(0, "$videoId", "title", "thumbnailPath", Date())
+                viewModel.insert(historyEntity)
                 CommentSheet(videoNowTime = 100.toFloat())//とりあえず仮で秒数を入れています。
             }
             if (youtubeVideoId(text) == null) {

@@ -9,8 +9,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.List
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
@@ -30,6 +30,7 @@ import jp.kusunoki.hacku2022_android.ui.component.pages.HistoryScreen
 import jp.kusunoki.hacku2022_android.ui.component.pages.HomeScreen
 import jp.kusunoki.hacku2022_android.ui.component.pages.VideoScreen
 import jp.kusunoki.hacku2022_android.ui.theme.Hacku2022androidTheme
+import timber.log.Timber
 
 val LocalNavController = staticCompositionLocalOf<NavHostController> {
     error("No Current NavController")
@@ -62,9 +63,11 @@ class MainActivity : ComponentActivity() {
                                 startDestination = Screen.Home.route
                             ) {
                                 composable(Screen.Home.route) {
+                                    Timber.d("MainActivityのHomeScreen")
                                     HomeScreen()
                                 }
                                 composable(Screen.History.route) {
+                                    Timber.d("MainActivityのHistoryScreen")
                                     HistoryScreen()
                                 }
                                 composable(
@@ -85,7 +88,7 @@ class MainActivity : ComponentActivity() {
 
 sealed class Screen(val route: String, val icon: ImageVector = Icons.Default.Home, @StringRes val resourceId: Int = R.string.app_name) {
     object Home: Screen("home", Icons.Default.Home, R.string.home_screen)
-    object History: Screen("history", Icons.Default.List, R.string.history_screen)
+    object History: Screen("history", Icons.Default.History, R.string.history_screen)
     object Video: Screen("video")
 }
 
