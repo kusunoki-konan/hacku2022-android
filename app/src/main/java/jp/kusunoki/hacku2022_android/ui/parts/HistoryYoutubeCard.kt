@@ -17,12 +17,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import jp.kusunoki.hacku2022_android.R
 
 @Composable
 fun HistoryYoutubeCard(
     title: String = "",
     channelTitle: String = "",
+    thumbnailPath: String = "",
     onCardClicked: () -> Unit
 ) {
     Card(
@@ -35,16 +37,35 @@ fun HistoryYoutubeCard(
         elevation = 0.dp
     ) {
         Row {
-            Image(
-                painter = painterResource(id = R.drawable.image),
-                contentDescription = stringResource(R.string.samune_image),
-                modifier = Modifier
-                    .padding(8.dp)
-                    .height(112.5.dp)
-                    .width(200.dp),
-                alignment = Alignment.Center,
-                contentScale = ContentScale.Crop
-            )
+            val padding = 8.dp
+            val imageHeight = 112.5.dp
+            val imageWidth = 150.dp
+
+            if (thumbnailPath.isNotBlank()) {
+                AsyncImage(
+                    model = thumbnailPath,
+                    contentDescription = null,
+                    placeholder = painterResource(R.drawable.image),
+                    modifier = Modifier
+                        .padding(padding)
+                        .height(imageHeight)
+                        .width(imageWidth),
+                    alignment = Alignment.Center,
+                    contentScale = ContentScale.Crop
+                )
+            } else {
+                Image(
+                    painter = painterResource(id = R.drawable.image),
+                    contentDescription = stringResource(R.string.samune_image),
+                    modifier = Modifier
+                        .padding(padding)
+                        .height(imageHeight)
+                        .width(imageWidth),
+                    alignment = Alignment.Center,
+                    contentScale = ContentScale.Crop
+                )
+            }
+
             Column {
                 Text(
                     title,

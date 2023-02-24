@@ -70,6 +70,7 @@ fun LoginScreen() {
 //            Button(onClick = {
 //                Firebase.auth.signOut()
 //                user.value = null
+//                navController.navigate(Screen.Login.route)
 //            }) {
 //                Text("Sign out")
 //            }
