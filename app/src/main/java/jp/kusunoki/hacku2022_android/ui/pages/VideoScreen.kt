@@ -1,4 +1,4 @@
-package jp.kusunoki.hacku2022_android.ui.component.pages
+package jp.kusunoki.hacku2022_android.ui.pages
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,8 +12,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import jp.kusunoki.hacku2022_android.HistoryEntity
 import jp.kusunoki.hacku2022_android.HistoryViewModel
 import jp.kusunoki.hacku2022_android.R
-import jp.kusunoki.hacku2022_android.ui.CommentSheet
-import jp.kusunoki.hacku2022_android.ui.YouTubePlayer
+import jp.kusunoki.hacku2022_android.ui.parts.YouTubePlayer
+import jp.kusunoki.hacku2022_android.ui.parts.CommentSheet
 import java.util.*
 
 @Composable

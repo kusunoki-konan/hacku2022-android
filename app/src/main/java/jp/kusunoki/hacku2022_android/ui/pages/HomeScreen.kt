@@ -1,4 +1,4 @@
-package jp.kusunoki.hacku2022_android.ui.component.pages
+package jp.kusunoki.hacku2022_android.ui.pages
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,8 +22,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import jp.kusunoki.hacku2022_android.LocalNavController
 import jp.kusunoki.hacku2022_android.R
 import jp.kusunoki.hacku2022_android.Screen
-import jp.kusunoki.hacku2022_android.YoutubeCardList
-import jp.kusunoki.hacku2022_android.ui.SearchBar
+import jp.kusunoki.hacku2022_android.ui.parts.YoutubeCardList
+import jp.kusunoki.hacku2022_android.ui.parts.SearchBar
 import jp.kusunoki.hacku2022_android.ui.viewmodel.HomeViewModel
 
 @Composable

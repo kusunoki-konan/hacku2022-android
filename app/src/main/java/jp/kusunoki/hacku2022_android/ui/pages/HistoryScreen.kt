@@ -1,4 +1,4 @@
-package jp.kusunoki.hacku2022_android.ui.component.pages
+package jp.kusunoki.hacku2022_android.ui.pages
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,7 +13,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.room.TypeConverter
 import jp.kusunoki.hacku2022_android.HistoryEntity
 import jp.kusunoki.hacku2022_android.HistoryViewModel
-import jp.kusunoki.hacku2022_android.HistoryYoutubeCard
+import jp.kusunoki.hacku2022_android.ui.parts.HistoryYoutubeCard
 import jp.kusunoki.hacku2022_android.R
 import timber.log.Timber
 import java.util.*

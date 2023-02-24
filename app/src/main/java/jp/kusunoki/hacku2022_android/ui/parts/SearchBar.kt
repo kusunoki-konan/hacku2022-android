@@ -1,4 +1,4 @@
-package jp.kusunoki.hacku2022_android.ui
+package jp.kusunoki.hacku2022_android.ui.parts
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding

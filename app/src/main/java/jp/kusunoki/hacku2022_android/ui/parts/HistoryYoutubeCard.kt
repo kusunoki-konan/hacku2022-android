@@ -1,4 +1,4 @@
-package jp.kusunoki.hacku2022_android
+package jp.kusunoki.hacku2022_android.ui.parts
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -17,9 +17,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import jp.kusunoki.hacku2022_android.R
 
 @Composable
-fun HistoryYoutubeCard(onCardClicked: () -> Unit) {
+fun HistoryYoutubeCard(
+    title: String = "",
+    channelTitle: String = "",
+    onCardClicked: () -> Unit
+) {
     Card(
         shape = RectangleShape,
         modifier = Modifier
@@ -42,7 +47,7 @@ fun HistoryYoutubeCard(onCardClicked: () -> Unit) {
             )
             Column {
                 Text(
-                    stringResource(R.string.video_title),
+                    title,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(4.dp),
@@ -52,7 +57,7 @@ fun HistoryYoutubeCard(onCardClicked: () -> Unit) {
                     overflow = TextOverflow.Ellipsis // 最大行数を超えた場合に末尾を省略する
                 )
                 Text(
-                    stringResource(R.string.channnel_title),
+                    channelTitle,
                     style = MaterialTheme.typography.body2,
                     modifier = Modifier
                         .fillMaxWidth()

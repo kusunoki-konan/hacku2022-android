@@ -1,6 +1,5 @@
-package jp.kusunoki.hacku2022_android
+package jp.kusunoki.hacku2022_android.ui.parts
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -19,6 +18,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import jp.kusunoki.hacku2022_android.R
+import timber.log.Timber
 
 @Composable
 fun YoutubeCardList() {
@@ -28,7 +29,7 @@ fun YoutubeCardList() {
     ) {
         items(10) {
             YoutubeCard(onCardClicked = {
-                Log.d("YoutubeCard", "Card clicked!")
+                Timber.d("Card clicked!")
             })
         }
     }

@@ -26,9 +26,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
-import jp.kusunoki.hacku2022_android.ui.component.pages.HistoryScreen
-import jp.kusunoki.hacku2022_android.ui.component.pages.HomeScreen
-import jp.kusunoki.hacku2022_android.ui.component.pages.VideoScreen
+import jp.kusunoki.hacku2022_android.ui.pages.HistoryScreen
+import jp.kusunoki.hacku2022_android.ui.pages.HomeScreen
+import jp.kusunoki.hacku2022_android.ui.pages.VideoScreen
 import jp.kusunoki.hacku2022_android.ui.theme.Hacku2022androidTheme
 import timber.log.Timber
 
@@ -63,11 +63,9 @@ class MainActivity : ComponentActivity() {
                                 startDestination = Screen.Home.route
                             ) {
                                 composable(Screen.Home.route) {
-                                    Timber.d("MainActivityのHomeScreen")
                                     HomeScreen()
                                 }
                                 composable(Screen.History.route) {
-                                    Timber.d("MainActivityのHistoryScreen")
                                     HistoryScreen()
                                 }
                                 composable(
