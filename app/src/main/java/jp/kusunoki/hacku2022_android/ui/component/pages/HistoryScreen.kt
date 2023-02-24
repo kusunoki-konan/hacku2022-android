@@ -1,26 +1,22 @@
 package jp.kusunoki.hacku2022_android.ui.component.pages
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import android.annotation.SuppressLint
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.room.TypeConverter
 import jp.kusunoki.hacku2022_android.HistoryEntity
 import jp.kusunoki.hacku2022_android.HistoryViewModel
-import java.util.*
-import androidx.compose.ui.res.stringResource
 import jp.kusunoki.hacku2022_android.HistoryYoutubeCard
 import jp.kusunoki.hacku2022_android.R
 import timber.log.Timber
+import java.util.*
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -49,10 +45,8 @@ fun HistoryScreen(viewModel: HistoryViewModel = hiltViewModel()) {
             },
             content = {
                 val state = rememberScrollState()
-                Column{
                     val historyFutureList = historyListState.value
-                    Text("$historyFutureList")
-                }
+                    Timber.d("historyFutureList:$historyFutureList")
                 LazyColumn{
                     items(10) {
                         HistoryYoutubeCard(onCardClicked = {
