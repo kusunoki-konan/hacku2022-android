@@ -1,4 +1,4 @@
-package jp.kusunoki.hacku2022_android.data
+package jp.kusunoki.hacku2022_android.data.model
 
 data class YoutubeList(
     val items: List<YoutubeItem>
@@ -19,7 +19,7 @@ data class YoutubeList(
             val thumbnails: Thumbnails,
             val channelTitle: String,
 
-        ) {
+            ) {
             data class Thumbnails(
                 val medium: Medium
             ) {

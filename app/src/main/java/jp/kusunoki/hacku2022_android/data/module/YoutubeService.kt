@@ -1,9 +1,9 @@
-package jp.kusunoki.hacku2022_android.data
+package jp.kusunoki.hacku2022_android.data.module
 
 import jp.kusunoki.hacku2022_android.BuildConfig
+import jp.kusunoki.hacku2022_android.data.model.YoutubeList
 import retrofit2.Response
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface YoutubeService {

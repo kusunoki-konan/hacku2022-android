@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.room.TypeConverter
-import jp.kusunoki.hacku2022_android.data.HistoryEntity
+import jp.kusunoki.hacku2022_android.data.model.HistoryEntity
 import jp.kusunoki.hacku2022_android.ui.viewmodel.HistoryViewModel
 import jp.kusunoki.hacku2022_android.ui.parts.HistoryYoutubeCard
 import jp.kusunoki.hacku2022_android.R

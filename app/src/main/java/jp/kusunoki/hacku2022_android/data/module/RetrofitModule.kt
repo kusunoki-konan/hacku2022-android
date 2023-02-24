@@ -1,11 +1,10 @@
-package jp.kusunoki.hacku2022_android.data
+package jp.kusunoki.hacku2022_android.data.module
 
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import jp.kusunoki.hacku2022_android.BuildConfig
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton

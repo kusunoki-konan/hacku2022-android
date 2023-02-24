@@ -3,8 +3,8 @@ package jp.kusunoki.hacku2022_android.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import jp.kusunoki.hacku2022_android.data.HistoryEntity
-import jp.kusunoki.hacku2022_android.data.HistoryRepositoryImpl
+import jp.kusunoki.hacku2022_android.data.model.HistoryEntity
+import jp.kusunoki.hacku2022_android.data.repository.HistoryRepositoryImpl
 import jp.kusunoki.hacku2022_android.util.Future
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest

@@ -1,16 +1,14 @@
-package jp.kusunoki.hacku2022_android.data
+package jp.kusunoki.hacku2022_android.data.repository
 
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import jp.kusunoki.hacku2022_android.BuildConfig
+import jp.kusunoki.hacku2022_android.data.module.YoutubeService
+import jp.kusunoki.hacku2022_android.data.model.YoutubeList
 import jp.kusunoki.hacku2022_android.util.Future
 import jp.kusunoki.hacku2022_android.util.apiFlow
 import kotlinx.coroutines.flow.Flow
-import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Path
 import javax.inject.Inject
 import javax.inject.Singleton
 

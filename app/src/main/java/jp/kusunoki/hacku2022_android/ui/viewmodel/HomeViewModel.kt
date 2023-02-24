@@ -4,8 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import jp.kusunoki.hacku2022_android.data.YoutubeList
-import jp.kusunoki.hacku2022_android.data.YoutubeRepositoryImpl
+import jp.kusunoki.hacku2022_android.data.model.YoutubeList
+import jp.kusunoki.hacku2022_android.data.repository.YoutubeRepositoryImpl
 import jp.kusunoki.hacku2022_android.util.Future
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch

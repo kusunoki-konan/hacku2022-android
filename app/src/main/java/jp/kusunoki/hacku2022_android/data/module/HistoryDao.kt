@@ -1,6 +1,7 @@
-package jp.kusunoki.hacku2022_android.data
+package jp.kusunoki.hacku2022_android.data.module
 
 import androidx.room.*
+import jp.kusunoki.hacku2022_android.data.model.HistoryEntity
 
 @Dao
 interface HistoryDao {

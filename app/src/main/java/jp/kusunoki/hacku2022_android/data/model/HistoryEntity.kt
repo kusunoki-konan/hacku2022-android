@@ -1,4 +1,4 @@
-package jp.kusunoki.hacku2022_android.data
+package jp.kusunoki.hacku2022_android.data.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

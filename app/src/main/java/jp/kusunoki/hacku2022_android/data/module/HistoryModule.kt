@@ -1,4 +1,4 @@
-package jp.kusunoki.hacku2022_android.data
+package jp.kusunoki.hacku2022_android.data.module
 
 import android.content.Context
 import androidx.room.Room
@@ -7,6 +7,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import jp.kusunoki.hacku2022_android.data.HistoryRepository
+import jp.kusunoki.hacku2022_android.data.HistoryRepositoryImpl
 import javax.inject.Singleton
 
 @Module

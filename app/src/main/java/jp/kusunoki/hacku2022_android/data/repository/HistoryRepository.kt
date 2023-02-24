@@ -1,18 +1,13 @@
-package jp.kusunoki.hacku2022_android.data
+package jp.kusunoki.hacku2022_android.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import jp.kusunoki.hacku2022_android.data.HistoryDao
-import jp.kusunoki.hacku2022_android.data.HistoryEntity
+import jp.kusunoki.hacku2022_android.data.module.HistoryDao
+import jp.kusunoki.hacku2022_android.data.model.HistoryEntity
 import jp.kusunoki.hacku2022_android.util.Future
 import jp.kusunoki.hacku2022_android.util.localFlow
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
-import javax.inject.Singleton
 
 interface HistoryRepository{}
 class HistoryRepositoryImpl @Inject constructor(private val historyDao: HistoryDao):HistoryRepository {
