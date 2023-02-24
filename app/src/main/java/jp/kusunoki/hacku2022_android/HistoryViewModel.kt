@@ -21,8 +21,6 @@ class HistoryViewModel @Inject constructor(private val repository: HistoryReposi
             }
     }
 
-//    val history: LiveData<List<HistoryEntity>> = repository.getAllHistory()
-
     fun insert(history: HistoryEntity) {
         viewModelScope.launch {
             repository.insert(history)
