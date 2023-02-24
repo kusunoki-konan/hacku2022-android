@@ -110,19 +110,22 @@ fun MainBottomNavigation() {
     if(homeOrHistory == true) {
         BottomNavigation(
             // コメントアウトは従来のデザイン
-//            backgroundColor = Color.White,
-//            contentColor = Primary
+            backgroundColor = Color.White,
+            contentColor = Primary
         ) {
             items.forEach { screen ->
+                val selected = currentDestination.hierarchy.any { it.route == screen.route }
                 BottomNavigationItem(
                     icon = {
                         Icon(screen.icon, contentDescription = null)
                     },
                     label = {
-                        Text(text = stringResource(id = screen.resourceId))
+                        Text(
+                            text = stringResource(id = screen.resourceId),
+                            color = if(selected) Color.Black else Color.LightGray
+                        )
                     },
-                    enabled = currentDestination.hierarchy.any { it.route != screen.route },
-                    selected = currentDestination.hierarchy.any { it.route == screen.route },
+                    selected = selected,
                     onClick = {
                         navController.navigate(screen.route)
                     }
