@@ -11,7 +11,6 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.room.TypeConverter
 import jp.kusunoki.hacku2022_android.HistoryViewModel
-import timber.log.Timber
 import java.util.*
 
 
@@ -34,7 +33,7 @@ fun HistoryScreen(viewModel: HistoryViewModel = hiltViewModel()) {
         color = MaterialTheme.colors.background
     ) {
         Column{
-            Text("${historyList.value?.let { it -> Timber.d("${it}") }}")
+            Text("${historyList.value}")
         }
     }
 }
