@@ -71,7 +71,7 @@ fun YoutubeCard(onCardClicked: () -> Unit) {
                         .clip(CircleShape)
                 )
                 Text(
-                    stringResource(R.string.channnel_title),
+                    stringResource(R.string.channnel_title_mock),
                     modifier = Modifier
                         .padding(4.dp)
                         .fillMaxWidth(),
@@ -81,7 +81,7 @@ fun YoutubeCard(onCardClicked: () -> Unit) {
                 )
             }
             Text(
-                stringResource(R.string.video_title),
+                stringResource(R.string.video_title_mock),
                 style = MaterialTheme.typography.body2,
                 modifier = Modifier
                     .padding(4.dp)

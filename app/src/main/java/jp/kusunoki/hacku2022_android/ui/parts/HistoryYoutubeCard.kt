@@ -66,7 +66,7 @@ fun HistoryYoutubeCard(
                     overflow = TextOverflow.Ellipsis // 最大行数を超えた場合に末尾を省略する
                 )
                 Text(
-                    stringResource(R.string.when_play),
+                    stringResource(R.string.when_play_mock),
                     style = MaterialTheme.typography.caption,
                     modifier = Modifier
                         .fillMaxWidth()

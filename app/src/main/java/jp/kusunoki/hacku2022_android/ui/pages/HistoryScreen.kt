@@ -3,18 +3,21 @@ package jp.kusunoki.hacku2022_android.ui.pages
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.room.TypeConverter
-import jp.kusunoki.hacku2022_android.HistoryEntity
-import jp.kusunoki.hacku2022_android.HistoryViewModel
+import jp.kusunoki.hacku2022_android.data.HistoryEntity
+import jp.kusunoki.hacku2022_android.ui.viewmodel.HistoryViewModel
 import jp.kusunoki.hacku2022_android.ui.parts.HistoryYoutubeCard
 import jp.kusunoki.hacku2022_android.R
+import jp.kusunoki.hacku2022_android.util.Future
 import timber.log.Timber
 import java.util.*
 
@@ -22,17 +25,11 @@ import java.util.*
 @Composable
 fun HistoryScreen(viewModel: HistoryViewModel = hiltViewModel()) {
     viewModel.refresh()
-    // TODO: 履歴画面
-    // データの挿入
-    val historyEntity = HistoryEntity(0, "videoId", "title", "thumbnailPath", Date())
-//    viewModel.insert(historyEntity)
 
     // データの更新
     // historyListに入っているのはListを変換してStateにして入れている
-    val historyListState = viewModel.historyList.observeAsState() // 更新するデータを取得する
-//    Timber.d("$historyList")
-    // データの削除
-//    viewModel.deleteAll()
+    val historyState = viewModel.historyState.collectAsState()
+
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.background
@@ -44,14 +41,56 @@ fun HistoryScreen(viewModel: HistoryViewModel = hiltViewModel()) {
                 )
             },
             content = {
-                val state = rememberScrollState()
-                    val historyFutureList = historyListState.value
-                    Timber.d("historyFutureList:$historyFutureList")
-                LazyColumn{
-                    items(10) {
-                        HistoryYoutubeCard(onCardClicked = {
-                            Timber.d("Card clicked!")
-                        })
+                when(historyState.value) {
+                    is Future.Proceeding -> {
+
+                    }
+                    is Future.Success -> {
+                        val historyList = (historyState.value as Future.Success<List<HistoryEntity>>).value
+
+                        LazyColumn{
+                            items(historyList) {history ->
+                                HistoryYoutubeCard(
+                                    title = history.title,
+                                    onCardClicked = {
+                                        Timber.d("Card clicked!")
+                                    }
+                                )
+                            }
+                        }
+                    }
+                    is Future.Error -> {
+                        val openDialog = remember { mutableStateOf(true)  }
+                        val error = (historyState.value as Future.Error).error
+
+                        if (openDialog.value) {
+                            AlertDialog(
+                                onDismissRequest = { openDialog.value = false },
+                                title = {
+                                    Text(stringResource(id = R.string.history_error_dialog_title))
+                                },
+                                text = {
+                                    Text("${error.message}")
+                                },
+                                confirmButton = {
+                                    Button(
+                                        onClick = {
+                                            openDialog.value = false
+                                        }) {
+                                        Text(stringResource(id = R.string.history_error_dialog_confirm))
+                                    }
+                                },
+                                dismissButton = {
+                                    Button(
+                                        onClick = {
+                                            openDialog.value = false
+                                        }) {
+                                        Text(stringResource(id = R.string.history_error_dialog_dismiss))
+                                    }
+                                }
+                            )
+                        }
+
                     }
                 }
             }

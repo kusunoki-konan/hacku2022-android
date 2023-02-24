@@ -1,4 +1,4 @@
-package jp.kusunoki.hacku2022_android
+package jp.kusunoki.hacku2022_android.data
 
 import androidx.room.*
 

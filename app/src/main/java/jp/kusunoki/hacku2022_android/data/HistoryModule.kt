@@ -1,4 +1,4 @@
-package jp.kusunoki.hacku2022_android
+package jp.kusunoki.hacku2022_android.data
 
 import android.content.Context
 import androidx.room.Room
@@ -16,9 +16,15 @@ object HistoryModule {
     @Provides
     fun provideDatabase(
         @ApplicationContext context: Context
-    ) = Room.databaseBuilder(context, AppDatabase::class.java, "history_table").build()
+    ) = Room.databaseBuilder(context, HistoryDatabase::class.java, "history_table").build()
 
     @Singleton
     @Provides
-    fun provideDao(db: AppDatabase) = db.historyDao()
+    fun provideDao(db: HistoryDatabase) = db.historyDao()
+
+    @Singleton
+    @Provides
+    fun provideHistoryRepository(
+        dao: HistoryDao
+    ): HistoryRepository = HistoryRepositoryImpl(dao)
 }

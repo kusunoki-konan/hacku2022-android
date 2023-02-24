@@ -253,7 +253,7 @@ fun VideoClipButton(
             disabledContentColor = Color.LightGray
         ),
     ) {
-        Text(stringResource(R.string.video_attach))
+        Text(stringResource(R.string.video_clip_attach))
     }
 }
 

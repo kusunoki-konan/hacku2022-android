@@ -1,4 +1,4 @@
-package jp.kusunoki.hacku2022_android
+package jp.kusunoki.hacku2022_android.data
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
@@ -7,6 +7,6 @@ import jp.kusunoki.hacku2022_android.ui.pages.Converters
 
 @Database(entities = [HistoryEntity::class], version = 1, exportSchema = true)
 @TypeConverters(Converters::class)
-abstract class AppDatabase : RoomDatabase() {
+abstract class HistoryDatabase : RoomDatabase() {
     abstract fun historyDao(): HistoryDao
 }

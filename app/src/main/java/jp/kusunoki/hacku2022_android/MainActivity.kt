@@ -30,6 +30,8 @@ import jp.kusunoki.hacku2022_android.ui.pages.HistoryScreen
 import jp.kusunoki.hacku2022_android.ui.pages.HomeScreen
 import jp.kusunoki.hacku2022_android.ui.pages.VideoScreen
 import jp.kusunoki.hacku2022_android.ui.theme.Hacku2022androidTheme
+import jp.kusunoki.hacku2022_android.util.youtubeTime
+import jp.kusunoki.hacku2022_android.util.youtubeVideoId
 import timber.log.Timber
 
 val LocalNavController = staticCompositionLocalOf<NavHostController> {
@@ -72,7 +74,10 @@ class MainActivity : ComponentActivity() {
                                     route = "${Screen.Video.route}/{videoUrl}",
                                 ) { backStackEntry ->
                                     val videoUrl = backStackEntry.arguments?.getString("videoUrl") ?: ""
-                                    VideoScreen(videoUrl)
+                                    val videoId = videoUrl.youtubeVideoId()
+                                    val second = videoUrl.youtubeTime()
+
+                                    VideoScreen(videoId, second)
                                 }
                             }
                         }
