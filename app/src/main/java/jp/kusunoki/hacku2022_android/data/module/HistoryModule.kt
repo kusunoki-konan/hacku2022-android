@@ -7,8 +7,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import jp.kusunoki.hacku2022_android.data.HistoryRepository
-import jp.kusunoki.hacku2022_android.data.HistoryRepositoryImpl
+import jp.kusunoki.hacku2022_android.data.repository.HistoryRepository
+import jp.kusunoki.hacku2022_android.data.repository.HistoryRepositoryImpl
 import javax.inject.Singleton
 
 @Module

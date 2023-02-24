@@ -16,6 +16,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -30,6 +31,7 @@ import jp.kusunoki.hacku2022_android.ui.pages.HistoryScreen
 import jp.kusunoki.hacku2022_android.ui.pages.HomeScreen
 import jp.kusunoki.hacku2022_android.ui.pages.VideoScreen
 import jp.kusunoki.hacku2022_android.ui.theme.Hacku2022androidTheme
+import jp.kusunoki.hacku2022_android.ui.theme.Primary
 import jp.kusunoki.hacku2022_android.util.youtubeTime
 import jp.kusunoki.hacku2022_android.util.youtubeVideoId
 import timber.log.Timber
@@ -106,7 +108,11 @@ fun MainBottomNavigation() {
     }
 
     if(homeOrHistory == true) {
-        BottomNavigation {
+        BottomNavigation(
+            // コメントアウトは従来のデザイン
+//            backgroundColor = Color.White,
+//            contentColor = Primary
+        ) {
             items.forEach { screen ->
                 BottomNavigationItem(
                     icon = {
@@ -115,6 +121,7 @@ fun MainBottomNavigation() {
                     label = {
                         Text(text = stringResource(id = screen.resourceId))
                     },
+                    enabled = currentDestination.hierarchy.any { it.route != screen.route },
                     selected = currentDestination.hierarchy.any { it.route == screen.route },
                     onClick = {
                         navController.navigate(screen.route)
