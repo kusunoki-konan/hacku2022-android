@@ -30,7 +30,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
-import jp.kusunoki.hacku2022_android.ui.component.pages.HistoryScreen
 import jp.kusunoki.hacku2022_android.ui.component.pages.HomeScreen
 import jp.kusunoki.hacku2022_android.ui.component.pages.VideoScreen
 import jp.kusunoki.hacku2022_android.ui.theme.Hacku2022androidTheme
@@ -46,7 +45,7 @@ val LocalNavController = staticCompositionLocalOf<NavHostController> {
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    private val dao = RoomApplication.database.todoDao()
+    private val dao = KusunokiApp.database.todoDao()
     private var todoList = mutableStateListOf<Todo>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +56,6 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    MainScreen(todoList)
                 }
                 CompositionLocalProvider(
                     LocalNavController provides navController
@@ -81,7 +79,8 @@ class MainActivity : ComponentActivity() {
                                     HomeScreen()
                                 }
                                 composable(Screen.History.route) {
-                                    HistoryScreen()
+//                                    HistoryScreen()
+                                    MainScreen(todoList)
                                 }
                                 composable(
                                     route = "${Screen.Video.route}/{videoUrl}",
