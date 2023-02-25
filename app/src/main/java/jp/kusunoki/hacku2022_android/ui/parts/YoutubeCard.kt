@@ -26,6 +26,8 @@ import coil.compose.AsyncImage
 import jp.kusunoki.hacku2022_android.LocalNavController
 import jp.kusunoki.hacku2022_android.R
 import jp.kusunoki.hacku2022_android.Screen
+import jp.kusunoki.hacku2022_android.data.model.Comment
+import jp.kusunoki.hacku2022_android.data.model.HistoryEntity
 import jp.kusunoki.hacku2022_android.data.model.YoutubeList
 import jp.kusunoki.hacku2022_android.util.Future
 import timber.log.Timber
@@ -67,6 +69,31 @@ fun YouTubeCardRow(videoItemState: Future<YoutubeList> = Future.Proceeding) {
         }
     }
 }
+
+@Composable
+fun YouTubeCardRow() {
+    val navController = LocalNavController.current
+    val mock = (1..8).map { YouTubeCardMock("いかの塩辛", "Jetpack Compose for Webを触ってみる [Kotlin]", "https://i.ytimg.com/vi/NRDko7XBD7I/mqdefault.jpg", "NRDko7XBD7I") }
+
+    LazyRow(
+        modifier = Modifier.fillMaxWidth(),
+        contentPadding = PaddingValues(horizontal = 8.dp)
+    ) {
+        items(mock) {video ->
+            YoutubeCard(
+                channelTitle = video.channelTitle,
+                title = video.title,
+                thumbnailPath = video.thumbnail,
+                onCardClicked = {
+                    navController.navigate("${Screen.Video.route}/${video.videoId}")
+                }
+            )
+        }
+    }
+}
+
+data class YouTubeCardMock(val channelTitle: String, val title: String, val thumbnail: String, val videoId: String)
+
 @Composable
 fun YoutubeCard(
     channelTitle: String = "",

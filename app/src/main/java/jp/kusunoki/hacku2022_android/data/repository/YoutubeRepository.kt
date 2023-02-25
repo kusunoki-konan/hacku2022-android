@@ -45,6 +45,14 @@ class YoutubeRepositoryImpl @Inject constructor(
     ): Flow<Future<YoutubeList>> = apiFlow {
         youtubeService.fetchVideoList(query = query)
     }
+
+    // クエリ入りで動画のリストが返ってきます
+    fun getVideoList(
+        max: Int,
+        query: String
+    ): Flow<Future<YoutubeList>> = apiFlow {
+        youtubeService.fetchVideoList(max = max, query = query)
+    }
 }
 
 @Module

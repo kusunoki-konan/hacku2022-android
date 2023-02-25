@@ -128,7 +128,8 @@ fun HomeContent(
                         navController.navigate(Screen.Login.route)
                     }
             )
-            YouTubeCardRow(recommendVideoList)
+            YouTubeCardRow()
+//            YouTubeCardRow(recommendVideoList)
 
             ListSpacer(modifier = Modifier.padding(8.dp, 0.dp))
             Text(
@@ -137,7 +138,8 @@ fun HomeContent(
                 fontSize = 20.sp,
                 modifier = Modifier.padding(all = 8.dp)
             )
-            YouTubeCardRow(newVideoList)
+            YouTubeCardRow()
+//            YouTubeCardRow(newVideoList)
 
             ListSpacer(modifier = Modifier.padding(8.dp, 0.dp))
             Text(

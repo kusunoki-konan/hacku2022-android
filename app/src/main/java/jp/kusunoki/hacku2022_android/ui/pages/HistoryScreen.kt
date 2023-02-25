@@ -16,10 +16,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.room.TypeConverter
+import jp.kusunoki.hacku2022_android.LocalNavController
 import jp.kusunoki.hacku2022_android.data.model.HistoryEntity
 import jp.kusunoki.hacku2022_android.ui.viewmodel.HistoryViewModel
 import jp.kusunoki.hacku2022_android.ui.parts.HistoryYoutubeCard
 import jp.kusunoki.hacku2022_android.R
+import jp.kusunoki.hacku2022_android.Screen
 import jp.kusunoki.hacku2022_android.util.Future
 import timber.log.Timber
 import java.util.*
@@ -32,6 +34,7 @@ fun HistoryScreen(viewModel: HistoryViewModel = hiltViewModel()) {
     // データの更新
     // historyListに入っているのはListを変換してStateにして入れている
     val historyState = viewModel.historyState.collectAsState()
+    val navController = LocalNavController.current
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -55,14 +58,25 @@ fun HistoryScreen(viewModel: HistoryViewModel = hiltViewModel()) {
 
                     }
                     is Future.Success -> {
-                        val historyList = (historyState.value as Future.Success<List<HistoryEntity>>).value
+//                        val historyList = (historyState.value as Future.Success<List<HistoryEntity>>).value
+                        val historyList = (1..6).map {
+                            HistoryEntity(
+                                it,
+                                "NRDko7XBD7I",
+                                "Jetpack Compose for Webを触ってみる [Kotlin]",
+                                "https://i.ytimg.com/vi/NRDko7XBD7I/mqdefault.jpg",
+                                Date()
+                            )
+                        }
 
                         LazyColumn{
                             items(historyList) {history ->
                                 HistoryYoutubeCard(
                                     title = history.title,
+                                    thumbnailPath = history.thumbnailPath,
+                                    date = history.watchDate,
                                     onCardClicked = {
-                                        Timber.d("Card clicked!")
+                                        navController.navigate("${Screen.Video.route}/${history.videoId}")
                                     }
                                 )
                             }

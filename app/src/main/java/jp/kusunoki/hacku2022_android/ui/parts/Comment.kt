@@ -11,10 +11,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -31,88 +28,16 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import jp.kusunoki.hacku2022_android.R
+import jp.kusunoki.hacku2022_android.data.model.Comment
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-@OptIn(ExperimentalMaterialApi::class)
-@Composable
-fun CommentSheet(
-    videoNowTime: Float,
-    onTapContent: () -> Unit = {},
-    onReturnPlayer: () -> Unit = {}
-) {
-    val sheetState = rememberModalBottomSheetState(
-        initialValue = ModalBottomSheetValue.Hidden,
-        confirmStateChange = { it != ModalBottomSheetValue.HalfExpanded },
-        skipHalfExpanded = true
-    )
-    val coroutineScope = rememberCoroutineScope()
-
-    BackHandler(sheetState.isVisible) {
-        coroutineScope.launch {
-            sheetState.hide()
-            onReturnPlayer()
-        }
-    }
-
-    ModalBottomSheetLayout(
-        sheetState = sheetState,
-        sheetContent = {
-            CommentSheetContent(
-                videoNowTime = videoNowTime,
-                onSheetHide = {
-                    coroutineScope.launch {
-                        sheetState.hide()
-                        onReturnPlayer()
-                    }
-                }
-            )
-        },
-        sheetShape = RoundedCornerShape(5, 5, 0, 0),
-        modifier = Modifier.fillMaxSize(),
-    ) {
-        Row {
-            Image(
-                painter = painterResource(id = R.drawable.circle),
-                contentDescription = stringResource(R.string.channel_image),
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .padding(horizontal = 8.dp, vertical = 12.dp)
-                    .size(40.dp)
-                    .clip(CircleShape)
-            )
-            Button(
-                onClick = {
-                    coroutineScope.launch {
-                        if (sheetState.isVisible) {
-                            sheetState.hide()
-                        } else {
-                            onTapContent()
-                            sheetState.show()
-                        }
-                    }
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 8.dp, vertical = 8.dp)
-                    .height(48.dp),
-                shape = RoundedCornerShape(14.dp),
-                colors = ButtonDefaults.textButtonColors(
-                    backgroundColor = Color.LightGray,
-                    contentColor = Color.Gray,
-                    disabledContentColor = Color.LightGray
-                )
-            ) {
-                Text(stringResource(R.string.question_add))
-            }
-        }
-    }
-}
-
 @Composable
 fun CommentSheetContent(
+    inputComment: MutableState<Comment>,
     videoNowTime: Float,
-    onSheetHide: () -> Unit = {}
+    onSheetHide: () -> Unit = {},
+    onSubmit: () -> Unit = {}
 ) {
     Column(
         modifier = Modifier
@@ -121,7 +46,6 @@ fun CommentSheetContent(
             .padding(16.dp)
     ) {
         val focusManager = LocalFocusManager.current
-        val text = remember { mutableStateOf(TextFieldValue()) }
         val textHeight = 18
         val lineCount = 5
 
@@ -171,8 +95,8 @@ fun CommentSheetContent(
         }
         Spacer(modifier = Modifier.height(18.dp))
         OutlinedTextField(
-            value = text.value,
-            onValueChange = { text.value = it },
+            value = inputComment.value.comment,
+            onValueChange = { inputComment.value = inputComment.value.copy(comment = it) },
             placeholder = { Text(stringResource(R.string.question_add)) },
             textStyle = TextStyle(
                 lineHeight = 18.sp,
@@ -212,8 +136,6 @@ fun CommentSheetContent(
             })
         }
 
-        Spacer(modifier = Modifier.height(250.dp))
-
         Row(
             modifier = Modifier
                 .padding(vertical = 10.dp)
@@ -222,10 +144,12 @@ fun CommentSheetContent(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             CancelButton(onClick = {
-                Timber.d("Cancel")
+                onSheetHide()
             })
             SendButton(onClick = {
-                Timber.d("Send")
+                inputComment.value = inputComment.value.copy(playTime = videoNowTime.toInt())
+                onSubmit()
+                onSheetHide()
             })
         }
     }

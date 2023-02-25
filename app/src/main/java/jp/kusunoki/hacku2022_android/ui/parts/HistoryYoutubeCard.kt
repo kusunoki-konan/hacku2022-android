@@ -19,12 +19,15 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import jp.kusunoki.hacku2022_android.R
+import java.text.SimpleDateFormat
+import java.util.*
 
 @Composable
 fun HistoryYoutubeCard(
     title: String = "",
     channelTitle: String = "",
     thumbnailPath: String = "",
+    date: Date = Date(),
     onCardClicked: () -> Unit
 ) {
     Card(
@@ -40,6 +43,7 @@ fun HistoryYoutubeCard(
             val padding = 8.dp
             val imageHeight = 112.5.dp
             val imageWidth = 150.dp
+            val df = SimpleDateFormat("MM月dd日")
 
             if (thumbnailPath.isNotBlank()) {
                 AsyncImage(
@@ -78,7 +82,7 @@ fun HistoryYoutubeCard(
                     overflow = TextOverflow.Ellipsis // 最大行数を超えた場合に末尾を省略する
                 )
                 Text(
-                    channelTitle,
+                    "いかの塩辛",
                     style = MaterialTheme.typography.body2,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -87,7 +91,7 @@ fun HistoryYoutubeCard(
                     overflow = TextOverflow.Ellipsis // 最大行数を超えた場合に末尾を省略する
                 )
                 Text(
-                    stringResource(R.string.when_play_mock),
+                    "${df.format(date)}視聴",
                     style = MaterialTheme.typography.caption,
                     modifier = Modifier
                         .fillMaxWidth()
