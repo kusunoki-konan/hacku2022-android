@@ -16,6 +16,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -26,10 +27,14 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
-import jp.kusunoki.hacku2022_android.ui.component.pages.HistoryScreen
-import jp.kusunoki.hacku2022_android.ui.component.pages.HomeScreen
-import jp.kusunoki.hacku2022_android.ui.component.pages.VideoScreen
+import jp.kusunoki.hacku2022_android.ui.pages.HistoryScreen
+import jp.kusunoki.hacku2022_android.ui.pages.HomeScreen
+import jp.kusunoki.hacku2022_android.ui.pages.LoginScreen
+import jp.kusunoki.hacku2022_android.ui.pages.VideoScreen
 import jp.kusunoki.hacku2022_android.ui.theme.Hacku2022androidTheme
+import jp.kusunoki.hacku2022_android.ui.theme.Primary
+import jp.kusunoki.hacku2022_android.util.youtubeTime
+import jp.kusunoki.hacku2022_android.util.youtubeVideoId
 import timber.log.Timber
 
 val LocalNavController = staticCompositionLocalOf<NavHostController> {
@@ -60,21 +65,25 @@ class MainActivity : ComponentActivity() {
                         ) {
                             NavHost(
                                 navController = LocalNavController.current,
-                                startDestination = Screen.Home.route
+                                startDestination = Screen.Login.route
                             ) {
+                                composable(Screen.Login.route) {
+                                    LoginScreen()
+                                }
                                 composable(Screen.Home.route) {
-                                    Timber.d("MainActivityのHomeScreen")
                                     HomeScreen()
                                 }
                                 composable(Screen.History.route) {
-                                    Timber.d("MainActivityのHistoryScreen")
                                     HistoryScreen()
                                 }
                                 composable(
                                     route = "${Screen.Video.route}/{videoUrl}",
                                 ) { backStackEntry ->
                                     val videoUrl = backStackEntry.arguments?.getString("videoUrl") ?: ""
-                                    VideoScreen(videoUrl)
+                                    val videoId = videoUrl.youtubeVideoId()
+                                    val second = videoUrl.youtubeTime()
+
+                                    VideoScreen(videoId, second)
                                 }
                             }
                         }
@@ -87,6 +96,7 @@ class MainActivity : ComponentActivity() {
 }
 
 sealed class Screen(val route: String, val icon: ImageVector = Icons.Default.Home, @StringRes val resourceId: Int = R.string.app_name) {
+    object Login: Screen("login")
     object Home: Screen("home", Icons.Default.Home, R.string.home_screen)
     object History: Screen("history", Icons.Default.History, R.string.history_screen)
     object Video: Screen("video")
@@ -103,16 +113,27 @@ fun MainBottomNavigation() {
     }
 
     if(homeOrHistory == true) {
-        BottomNavigation {
+        BottomNavigation(
+            // コメントアウトは従来のデザイン
+            backgroundColor = Color.White
+        ) {
             items.forEach { screen ->
+                val selected = currentDestination.hierarchy.any { it.route == screen.route }
                 BottomNavigationItem(
                     icon = {
-                        Icon(screen.icon, contentDescription = null)
+                        Icon(
+                            screen.icon,
+                            contentDescription = null,
+                            tint = if(selected) Primary else Color.LightGray
+                        )
                     },
                     label = {
-                        Text(text = stringResource(id = screen.resourceId))
+                        Text(
+                            text = stringResource(id = screen.resourceId),
+                            color = if(selected) Color.Black else Color.LightGray
+                        )
                     },
-                    selected = currentDestination.hierarchy.any { it.route == screen.route },
+                    selected = selected,
                     onClick = {
                         navController.navigate(screen.route)
                     }
